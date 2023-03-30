@@ -18,10 +18,11 @@
     /* position: absolute; */
     top: 50%;
     left: 50%;
-    transform: translate(75%, 10%);
+    transform: translate(75%, 0%);
     background: #fff;
     width: 40%;
     box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3);
+    margin-top: 6rem;
 }
 
 .form-register h1 {

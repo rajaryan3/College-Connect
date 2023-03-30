@@ -30,7 +30,11 @@
 }
 
 input[type="email"],
-input[type="password"], input[type="text"], input[type="number"],select {
+input[type="password"],
+input[type="text"],
+input[type="number"],
+input[type="file"],
+select {
     border: none;
     outline: none;
     border-bottom: 1px solid;
@@ -62,7 +66,7 @@ button {
     background: linear-gradient(to right, #25aae1, #4481eb, #04befe, #3f86ed);
 }
 
-.heading{
+.heading {
     padding-top: 2rem;
     color: white;
 }

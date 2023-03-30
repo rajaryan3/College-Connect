@@ -14,6 +14,7 @@ function Register({ currForm }) {
   const [email, setEmail] = useState("")
   const [desc, setDesc] = useState("")
   const [addon, setAddon] = useState("")
+  const [photo, setPhoto] = useState("")
   const [password, setPassword] = useState('')
 
   function handleSubmit(e) {
@@ -30,6 +31,7 @@ function Register({ currForm }) {
     console.log(email);
     console.log(desc);
     console.log(addon);
+    console.log(photo);
     console.log(password);
 
     const obj = {
@@ -44,6 +46,7 @@ function Register({ currForm }) {
       "Email": email,
       "Description": desc,
       "Addon": addon,
+      "Photo": photo,
       "Password": password,
     }
 
@@ -128,6 +131,9 @@ function Register({ currForm }) {
           <label htmlFor="addon">Add-on</label>
           <input type="text" name="addon" id="addon" placeholder="Addon" onChange={(e) => setAddon(e.target.value)} required />
           <br />
+
+          <label htmlFor="photo">Upload Your Photo</label>
+          <input type="file" name='photo' id='photo' placeholder='photo' onChange={(e) => setPhoto(e.target.value)} required />
 
           <label htmlFor="password">Password</label>
           <input type="password" name="password" id="password" placeholder="enter your password" onChange={(e) => setPassword(e.target.value)} required />
