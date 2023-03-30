@@ -11,7 +11,6 @@ function App() {
   }
   return (
     <div className="App">
-      <h1>saksham</h1>
 
       {
         currForm === 'login' ? <Login currForm={toggleForm} ></Login> : <Register currForm={toggleForm}></Register>

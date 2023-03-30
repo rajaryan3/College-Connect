@@ -1,0 +1,32 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.container-register {
+    height: 100%;
+    margin: 0 auto;
+    position: relative;
+    background: linear-gradient(79deg, #7439db, #c66fb6 48%, #f7944d);
+    overflow-y: scroll;
+}
+
+.container-register .form-register {
+    display: flex;
+    flex-direction: column;
+    /* position: absolute; */
+    top: 50%;
+    left: 50%;
+    transform: translate(75%, 10%);
+    background: #fff;
+    width: 40%;
+    box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3);
+}
+
+.form-register h1 {
+    text-align: center;
+    margin-top: 0.7rem;
+    margin-bottom: 1.5rem;
+}
+
