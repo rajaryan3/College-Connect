@@ -7,7 +7,7 @@ import Register from './components/Register';
 import Dashboard from './components/Dashboard';
 import Resources from './components/Resources';
 import Chat from './components/Chat';
-import Post from './Post';
+import Post from './components/Post';
 
 function App() {
   const [currForm, setCurrForm] = useState("login")
