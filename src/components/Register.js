@@ -13,7 +13,7 @@ function Register({ currForm }) {
   const [mobile, setMobile] = useState()
   const [email, setEmail] = useState("")
   const [desc, setDesc] = useState("")
-  const [addon, setAddon] = useState("")
+  // const [addon, setAddon] = useState("")
   const [photo, setPhoto] = useState("")
   const [password, setPassword] = useState('')
 
@@ -30,7 +30,7 @@ function Register({ currForm }) {
     console.log(mobile);
     console.log(email);
     console.log(desc);
-    console.log(addon);
+    // console.log(addon);
     console.log(photo);
     console.log(password);
 
@@ -45,7 +45,7 @@ function Register({ currForm }) {
       "Mobile": mobile,
       "Email": email,
       "Description": desc,
-      "Addon": addon,
+      // "Addon": addon,
       "Photo": photo,
       "Password": password,
     }
@@ -125,12 +125,12 @@ function Register({ currForm }) {
           <br />
 
           <label htmlFor="description">Description</label>
-          <input type="text" name="desc" id="desc" placeholder="Description about you" onChange={(e) => setDesc(e.target.value)} required />
+          <input type="text" name="desc" id="desc" placeholder="Description about you(optional)" onChange={(e) => setDesc(e.target.value)} />
           <br />
 
-          <label htmlFor="addon">Add-on</label>
+          {/* <label htmlFor="addon">Add-on</label>
           <input type="text" name="addon" id="addon" placeholder="Addon" onChange={(e) => setAddon(e.target.value)} required />
-          <br />
+          <br /> */}
 
           <label htmlFor="photo">Upload Your Photo</label>
           <input type="file" name='photo' id='photo' placeholder='photo' onChange={(e) => setPhoto(e.target.value)} required />
