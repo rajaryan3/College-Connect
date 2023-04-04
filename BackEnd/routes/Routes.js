@@ -14,7 +14,6 @@ route.get('/conversation', getConversation);
 route.put('/conversation', newMessage);
 route.put('/conversation/seenby', updateSeenBy);
 route.post('/post', uploadpost);
-route.put('/post' , updatePost);
 route.get('/post' , getposts);
 
 

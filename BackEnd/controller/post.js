@@ -7,13 +7,13 @@ const  newPost = async (request, response) => {
         response.status(400).json('Fill fields properly!');
         return;
     }
-    const newpost = {
+    const newpost = new Post({
         owner : owner,
         content : content,
         type : type ,
         text_description : text_description ,
         like_cnt : like_cnt
-    };
+    });
     try {
         const savedpost = await newpost.save();
         response.status(200).json({message : 'Post saved successfully.'});
@@ -32,9 +32,9 @@ const deletePost = async(req ,res)=>{
     }
 }
 
-const getConversation = async (request, response) => {
+const getPosts = async (request, response) => {
     try {
-        const result = await Post.findAll({ participants: { $all: [ request.body.senderId, request.body.receiverId] }});
+        const result = await Post.findAll();
         response.status(200).json(result);
     } catch (error) {
         response.status(500).json(error);
@@ -42,4 +42,4 @@ const getConversation = async (request, response) => {
 }
 
 
-module.exports = { newPost , deletePost }
+module.exports = { newPost , deletePost , getPosts }
