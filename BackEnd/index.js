@@ -75,17 +75,17 @@ app.get("/", (req, res) => {
 /* login api */
 app.post("/login",async (req, res) => {
 try {
-    if (req.body && req.body.username && req.body.password) {
-        const userexists = await user.findOne({ username: req.body.username })
+    if (req.body && req.body.mail && req.body.password) {
+        const userexists = await user.findOne({ mail: req.body.mail })
         if(userexists) {
-            //console.log('user'+ userexists.username + 'dusra wala :' + req.body.password + '\ncomplete user' + userexists)
+            //console.log('user'+ userexists.mail + 'dusra wala :' + req.body.password + '\ncomplete user' + userexists)
             var ismatched = await bcrypt.compare(req.body.password , userexists.password)
             console.log( '\nismatched' + ismatched)
             if(ismatched){
                 checkUserAndGenerateToken(userexists, req, res);
             } else {
                 res.status(400).json({
-                errorMessage: 'username or password is incorrect!',
+                errorMessage: 'mail or password is incorrect!',
                 status: false
                 });
             }
@@ -113,14 +113,27 @@ try {
 /* register api */
 app.post("/register", async(req, res) => {
 try {
-    if (req.body && req.body.username && req.body.password) {
+    const {user_role , first_name , last_name , mis ,current_year , AY , degree , mail , branch , phone_no  ,professiona_arr , my_description , addon , photo } = req.body;
+    if ( mail && password ) {
 
-    const userexists = await user.findOne({ username: req.body.username })
+    const userexists = await user.findOne({ mail: req.body.mail })
 
         if (!userexists) {
                 var User = new user({
-                username: req.body.username,
-                password: req.body.password
+                    user_role : user_role ,
+                    first_name:first_name , 
+                    last_name:last_name ,
+                    mis : mis ,
+                    current_year : current_year ,
+                    AY : AY,
+                    degree  :degree ,
+                    mail : mail,
+                    branch : branch , 
+                    phone_no : phone_no  ,
+                    professiona_arr : professiona_arr ,
+                    my_description : my_description ,
+                    addon : addon ,
+                    photo :photo 
             });
 
             var userRegister = await User.save();
@@ -150,11 +163,10 @@ try {
         });  */
         }else{
             res.status(400).json({
-                errorMessage: `UserName ${req.body.username} Already Exist!`,
+                errorMessage: `UserName ${req.body.mail} Already Exist!`,
                 status: false
             });
         }
-
     } else {    
     res.status(400).json({
         errorMessage: 'Add proper parameter first!',
@@ -171,7 +183,7 @@ try {
 });
 
 function checkUserAndGenerateToken(data, req, res) {
-    jwt.sign({ user: data.username, id: data._id }, 'thisisSEMPprojectsbackendbyaryankhose', { expiresIn: '1m' }, (err, token) => {
+    jwt.sign({ user: data.mail, id: data._id }, 'thisisSEMPprojectsbackendbyaryankhose', { expiresIn: '1m' }, (err, token) => {
     if(err) {
         res.status(400).json({
         status: false,

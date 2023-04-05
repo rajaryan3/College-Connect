@@ -32,7 +32,8 @@ const userSchema = new mongoose.Schema({
         header: { type: String },
         data: { type: String }
     }],
-    photo: { type: String, required: true }
+    photo: { type: String, required: true },
+    password : {type : String , required : true }
 });
 
 userSchema.pre('save', async function (next) {
