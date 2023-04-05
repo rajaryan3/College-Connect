@@ -18,38 +18,38 @@ app.use(cors());
 
 
 
-app.use("/", (req, res, next) => {
-    try {
-        if (req.path == "/login" || req.path == "/register" || req.path == "/") {
-        next();
-        } else {
-            /* decode jwt token if authorized*/
-            jwt.verify(req.headers.token, 'thisisSEMPprojectsbackendbyaryankhose', function (e, decoded) {
-                if(e){
-                    return res.status(401).json({
-                        errorMessage: 'User unauthorized!',
-                        status: false
-                    });
-                }
-                if (decoded && decoded.user) {
-                    req.user = decoded;
-                    next();
-                } else {
-                    console.log('byeeeeeee')
-                    return res.status(401).json({
-                errorMessage: 'User unauthorized!',
-                status: false
-            });
-            }
-        })
-        }
-    } catch (e) {
-        res.status(400).json({
-        errorMessage: 'Something went wrong!',
-        status: false
-        });
-    }
-    })
+// app.use("/", (req, res, next) => {
+//     try {
+//         if (req.path == "/login" || req.path == "/register" || req.path == "/") {
+//         next();
+//         } else {
+//             /* decode jwt token if authorized*/
+//             jwt.verify(req.headers.token, 'thisisSEMPprojectsbackendbyaryankhose', function (e, decoded) {
+//                 if(e){
+//                     return res.status(401).json({
+//                         errorMessage: 'User unauthorized!',
+//                         status: false
+//                     });
+//                 }
+//                 if (decoded && decoded.user) {
+//                     req.user = decoded;
+//                     next();
+//                 } else {
+//                     console.log('byeeeeeee')
+//                     return res.status(401).json({
+//                 errorMessage: 'User unauthorized!',
+//                 status: false
+//             });
+//             }
+//         })
+//         }
+//     } catch (e) {
+//         res.status(400).json({
+//         errorMessage: 'Something went wrong!',
+//         status: false
+//         });
+//     }
+//})
     
 app.use('/', Routes);
 
@@ -85,7 +85,7 @@ try {
         if(userexists) {
             //console.log('user'+ userexists.mail + 'dusra wala :' + req.body.password + '\ncomplete user' + userexists)
             var ismatched = await bcrypt.compare(req.body.password , userexists.password)
-            console.log( '\nismatched' + ismatched)
+            //console.log( '\nismatched' + ismatched)
             if(ismatched){
                 checkUserAndGenerateToken(userexists, req, res);
             } else {
@@ -114,7 +114,7 @@ try {
         });
     }
 });
-  
+
 /* register api */
 app.post("/register", async(req, res) => {
 try {
@@ -199,7 +199,8 @@ function checkUserAndGenerateToken(data, req, res) {
         res.json({
             message: 'Login Successfully.',
             token: token,
-            status: true
+            status: true,
+            userObject : data
         });
     }
     });
@@ -209,14 +210,39 @@ function checkUserAndGenerateToken(data, req, res) {
 app.put('/user', async (req, res) => {
     try {
         const data = req.body;
+        const {user_role , first_name , last_name , mis ,current_year , AY , degree , mail , branch , phone_no  ,professiona_arr , my_description , addon , photo } = req.body;
         if(!data)
             return res.status(422).json({error : "Please fill the fields properly"})
         //console.log(data);
-        answer = await User.findOneAndUpdate({ _id: data._id });
+        answer = await user.findOneAndUpdate({ _id: data._id } , {
+            user_role : user_role ,
+            first_name:first_name , 
+            last_name:last_name ,
+            mis : mis ,
+            current_year : current_year ,
+            AY : AY,
+            degree  :degree ,
+            mail : mail,
+            branch : branch , 
+            phone_no : phone_no  ,
+            professiona_arr : professiona_arr ,
+            my_description : my_description ,
+            addon : addon ,
+            photo :photo } , {new : true});
         if (!answer)
             return res.status(404).json({ error: `No record found with id : ${data._id}`})
         return res.status(200).json({ answer })
     } catch (error) {
+        console.log(error)
         return res.status(500).json({ error: "Something went wrong" })
+    }
+})
+
+app.get('/users' , async (req,res)=>{
+    try {
+        const result = await user.find();
+        res.status(200).json(result);
+    } catch (error) {
+        res.status(500).json(error);
     }
 })
