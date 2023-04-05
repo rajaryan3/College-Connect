@@ -1,8 +1,8 @@
 const Post = require('../db/models/postSchema.js');
 
-const  newPost = async (request, response) => {
+const  newPost = async (req, response) => {
     const { owner , content , type , text_description , like_cnt } = req.body;
-
+    console.log("hiiiii\n");
     if(!owner || !content || !type || !text_description || !like_cnt){
         response.status(400).json('Fill fields properly!');
         return;
@@ -34,7 +34,7 @@ const deletePost = async(req ,res)=>{
 
 const getPosts = async (request, response) => {
     try {
-        const result = await Post.findAll();
+        const result = await Post.find();
         response.status(200).json(result);
     } catch (error) {
         response.status(500).json(error);

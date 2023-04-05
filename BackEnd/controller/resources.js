@@ -25,11 +25,11 @@ const newResource = async (request, response) => {
 const updateResource = async(req,res)=>{
     try {
         const data = req.body._id;
-        const answer = await resources.findByIdAndUpdate({_id : data });
+        const answer = await resources.findByIdAndUpdate({_id : data  , 'subjects._id' : data.subjects._id  , } , { $set: { 'subjects.$.sub_name' : data.subjects.sub_name , 'subjects.$.sources' : data.subjects.sources } },{new : true});
     
         if(!answer)
-            return res.status(404).json({ error: `No record found` });
-        return res.status(200).json({ answer });
+            return res.status(404).json({ error: `No resource found` });
+        return res.status(200).json({ answer } );
 
     } catch (error) {
         console.log(error);

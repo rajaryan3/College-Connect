@@ -3,9 +3,8 @@ const bcrypt = require('bcrypt')
 
 const userSchema = new mongoose.Schema({
     user_role: {
-        type: Number,
-        required: true,
-        enum: [0, 1, 2]
+        type: String,
+        required: true
     },
     first_name: {
         type: String,
