@@ -1,11 +1,40 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-// import PostResource from './PostResources'
+// import PostResource from "./PostResource";
 // import DeleteResource from './DeleteResource'
 
 const ResourceList = () => {
   const [resources, setResources] = useState([]);
   const [currentSubject, setCurrentSubject] = useState(null);
+
+  const handleDelete = (props) => {
+    axios
+      .delete("http://localhost:8000/resources", { data: props })
+      .then((response) => {
+        console.log(response.status);
+        if (response.status === 200) {
+          alert("Resource deleted successfully");
+          axios
+            .get("http://localhost:8000/resources", {
+              params: {
+                AY: "2024",
+                degree: "BTech",
+                branch: "Computer",
+                currentYear: "TY",
+              },
+            })
+            .then((response) => {
+              setResources(response.data);
+            });
+          // console.log('here');
+        }
+        // console.log("here");
+      })
+      .catch((error) => {
+        alert("Error deleting resource", error);
+      });
+    // console.log(props);
+  };
 
   useEffect(() => {
     const user = {
@@ -27,8 +56,6 @@ const ResourceList = () => {
     getResources();
   }, [currentSubject]);
 
-   
-
   const handleClick = (subject) => {
     setCurrentSubject(subject);
     // axios.get("http://localhost:8000/resources").then((response) => {
@@ -41,27 +68,7 @@ const ResourceList = () => {
     setCurrentSubject(null);
   };
 
-  const handleDelete = (props) => {
-    axios
-      .delete("http://localhost:8000/resources", {data:props})
-      .then((response) => {
-        console.log(response.status);
-        if(response.status === 200){
-            alert("Resource deleted successfully");
-            axios.get("http://localhost:8000/resources", {
-              params:props
-            })
-            .then((response) => {
-              setResources(response.data)
-            })
-        }
-      })
-      .catch((error) => {
-        alert("Error deleting resource", error);
-      });
-    console.log(props);
-    
-  };
+ 
 
   const getResourceCards = () => {
     // const data = {"AY":"2024", "branch":"Computer", "degree":"BTech", "year":"TY", "sub_name":"", "content":""}
@@ -83,12 +90,12 @@ const ResourceList = () => {
           <button
             onClick={() =>
               handleDelete({
-                "AY": "2024",
-                "branch": "Computer",
-                "degree": "BTech",
-                "year": "TY",
-                "sub_name": currentSubject.sub_name,
-                "content": source.title,
+                AY: "2024",
+                branch: "Computer",
+                degree: "BTech",
+                year: "TY",
+                sub_name: currentSubject.sub_name,
+                content: source.title,
               })
             }
           >
@@ -123,8 +130,6 @@ const ResourceList = () => {
     ));
   };
 
-  
-
   return (
     <div className="container">
       {currentSubject ? (
@@ -139,7 +144,7 @@ const ResourceList = () => {
       ) : (
         <div>{getSubjectCards()}</div>
       )}
-      {/* <PostResource setResources={setResources}/> */}
+      {/* <PostResource setResources={setResources} /> */}
       {/* axios.get("http://localhost:8000/resources").then((response) =>{" "}
       {setResources(response.data)}) */}
     </div>

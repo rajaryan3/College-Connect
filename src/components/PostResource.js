@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { NavLink } from "react-router-dom";
 
-const PostResource = ({setResources}) => {
+const PostResource = () => {
   const [formData, setFormData] = useState({
     currentYear: "TY",
     AY: "2024",
@@ -68,16 +69,16 @@ const PostResource = ({setResources}) => {
           ],
         });
         alert("Post submitted successfully!");
-        axios.get("http://localhost:8000/resources", {
-          params: {
-            currentYear: "TY",
-            AY: "2024",
-            branch: "Computer",
-            degree: "BTech",
-          }
-        }).then((response) => {
-          setResources(response.data);
-        });
+        // axios.get("http://localhost:8000/resources", {
+        //   params: {
+        //     currentYear: "TY",
+        //     AY: "2024",
+        //     branch: "Computer",
+        //     degree: "BTech",
+        //   }
+        // }).then((response) => {
+        //   setResources(response.data);
+        // });
       })
       .catch((error) => {
         console.log(error);
@@ -139,9 +140,9 @@ const PostResource = ({setResources}) => {
         </label>
         <br />
         <button type="submit">Submit</button>
-        <a href="http://localhost:8000/resources">
-          <button type="Back to Resources">Back</button>
-        </a>
+        <NavLink to="http://localhost:3000/resources">
+          Resources Page
+        </NavLink>
       </form>
     </div>
   );
