@@ -1,67 +1,86 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 import axios from "axios";
+import PostResource from './postResources'
 
-const Resources = () => {
-
-  const [data, setData] = useState({"firstName":"","lastName":"","mis":"","branch":"","year":"","degree":"","isCR":"" });
-  const [rsc, setRsc] = useState([]);
-  // const {branch, year, degree} = data;
-
-  const API = 'http://localhost:3000';
-
+const ResourceList = () => {
+  const [resources, setResources] = useState([]);
 
   useEffect(() => {
-    const getApiData = async(url) => {
-      try{
-        const res1 = await axios.get(url);
-        setData(res1.data);
-        // console.log(res.data)
-        // console.log(res2.data);
+    const user = {
+      AY: "2024",
+      degree: "BTech",
+      branch: "Computer",
+      currentYear: "TY",
+    };
+    const getResources = async () => {
+      try {
+        const res = await axios.get("http://localhost:8000/resources", {
+          params: user
+        });
+        setResources(res.data.subjects);
+      } catch (err) {
+        console.error(err);
       }
-      catch(err){
-        console.log(err);
-      }
-    }
-    getApiData(`${API}/profile/642a70071892e3d3b1919e32`);
+    };
+    getResources();
   }, []);
 
-  useEffect(() => {
-     const getResources = async() => {
-      try{
-        const r = axios.get(`${API}/resources`, {
-          params : {
-            branch : 'Computer',
-            year : 'TY',
-            degree : 'BTech',
-            subject : 'Data Science'
-          }
-        });
-        setRsc(r.data);
-      }
-      catch(err){
-        console.log(err);
-      }
-     }
-     getResources();
-  }, [data]);
-  
-  return (
-    <div>
-      <h1>{data.firstName} {data.lastName}</h1>
-      <h1>{data.branch} {data.year} {data.degree}</h1>
-      {/* {rsc.map((resource) => (
-        <div key={resource.id}>
-          <h1>{resource.subject} {resource.file}</h1>
+
+  const [currentSubject, setCurrentSubject] = useState(null);
+
+  const handleClick = (subject) => {
+    setCurrentSubject(subject);
+  };
+
+  const handleBack = () => {
+    setCurrentSubject(null);
+  };
+
+  const getResourceCards = () => {
+    return currentSubject.sources.map((source) => (
+      <div key={source._id} className="card">
+        <div className="card-body">
+          <h5 className="card-title">{source.title}</h5>
+          <a href={source.linkOrFileUpload} className="card-link">
+            View Resource
+          </a>
         </div>
-      ))} */}
-      <h1>{rsc[0].branch}</h1>
-     
+      </div>
+    ));
+  };
 
+  const getSubjectCards = () => {
+    return resources.map((subject) => (
+      <div key={subject._id} className="card">
+        <div className="card-body">
+          <h5 className="card-title">{subject.sub_name}</h5>
+          <button
+            className="btn btn-primary"
+            onClick={() => handleClick(subject)}
+          >
+            View Resources
+          </button>
+        </div>
+      </div>
+    ));
+  };
 
-      {/* <h1>{rsc[0].subject} {rsc[0].file} </h1> */}
-
+  return (
+    <div className="container">
+      {currentSubject ? (
+        <div>
+          <button className="btn btn-primary" onClick={handleBack}>
+            Back to Subjects
+          </button>
+          <h3>{currentSubject.sub_name}</h3>
+          <div>{getResourceCards()}</div>
+        </div>
+      ) : (
+        <div>{getSubjectCards()}</div>
+      )}
+      <PostResource/>
     </div>
   );
-}
+};
 
-export default Resources;
+export default ResourceList;
