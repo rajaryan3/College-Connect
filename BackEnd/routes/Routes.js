@@ -20,7 +20,7 @@ route.delete('/post' , deletePost);
 route.get('/resources', getResource);
 route.post('/resources', newResource);
 route.put('/resources', updateResource);
-route.delete("/resources", deleteResource);
+route.delete('/resources', deleteResource);
 
 
 route.post('/file/upload', upload.single('file'), uploadImage);
