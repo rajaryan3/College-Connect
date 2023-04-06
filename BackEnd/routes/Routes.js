@@ -2,7 +2,8 @@ const express = require('express');
 
 const { newMessage , getConversation , newConversation , updateSeenBy } = require('../controller/conversation.js');
 const { uploadImage, getImage } = require('../controller/file.js');
-const { newPost , deletePost , getPosts } = require('../controller/post')
+const { newPost , deletePost , getPosts } = require('../controller/post');
+const { newResource , updateResource , getResource, deleteResource} = require('../controller/resources')
 
 const upload = require('../utils/upload.js');
 
@@ -16,6 +17,11 @@ route.put('/conversation/seenby', updateSeenBy);
 route.post('/post', newPost);
 route.get('/post' , getPosts);
 route.delete('/post' , deletePost);
+route.get('/resources', getResource);
+route.post('/resources', newResource);
+route.put('/resources', updateResource);
+route.delete("/resources", deleteResource);
+
 
 route.post('/file/upload', upload.single('file'), uploadImage);
 route.get('/file/:filename', getImage);

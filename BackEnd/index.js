@@ -18,38 +18,38 @@ app.use(cors());
 
 
 
-app.use("/", (req, res, next) => {
-    try {
-        if (req.path == "/login" || req.path == "/register" || req.path == "/") {
-        next();
-        } else {
-            /* decode jwt token if authorized*/
-            jwt.verify(req.headers.token, 'thisisSEMPprojectsbackendbyaryankhose', function (e, decoded) {
-                if(e){
-                    return res.status(401).json({
-                        errorMessage: 'User unauthorized!',
-                        status: false
-                    });
-                }
-                if (decoded && decoded.user) {
-                    req.user = decoded;
-                    next();
-                } else {
-                    console.log('byeeeeeee')
-                    return res.status(401).json({
-                errorMessage: 'User unauthorized!',
-                status: false
-            });
-            }
-        })
-        }
-    } catch (e) {
-        res.status(400).json({
-        errorMessage: 'Something went wrong!',
-        status: false
-        });
-    }
-    })
+// app.use("/", (req, res, next) => {
+//     try {
+//         if (req.path == "/login" || req.path == "/register" || req.path == "/") {
+//         next();
+//         } else {
+//             /* decode jwt token if authorized*/
+//             jwt.verify(req.headers.token, 'thisisSEMPprojectsbackendbyaryankhose', function (e, decoded) {
+//                 if(e){
+//                     return res.status(401).json({
+//                         errorMessage: 'User unauthorized!',
+//                         status: false
+//                     });
+//                 }
+//                 if (decoded && decoded.user) {
+//                     req.user = decoded;
+//                     next();
+//                 } else {
+//                     console.log('byeeeeeee')
+//                     return res.status(401).json({
+//                 errorMessage: 'User unauthorized!',
+//                 status: false
+//             });
+//             }
+//         })
+//         }
+//     } catch (e) {
+//         res.status(400).json({
+//         errorMessage: 'Something went wrong!',
+//         status: false
+//         });
+//     }
+//     })
     
 app.use('/', Routes);
 
