@@ -91,7 +91,7 @@ async function deleteResource(req, res) {
         AY,
         degree,
         branch,
-        currentYear: year,
+        "currentYear": year,
         "subjects.sub_name": sub_name,
         "subjects.sources.title": content,
       },
@@ -107,7 +107,7 @@ async function deleteResource(req, res) {
       return res.status(404).json({ error: "Resource not found" });
     }
 
-    return res.status(200);
+    return res.status(200).json({ message: "Resource deleted successfully" });
   } catch (error) {
     console.error(error);
     return res.status(500).json({ error: "Internal server error" });
