@@ -1,15 +1,14 @@
-const resources = require('../db/models/resources.js');
+const resources = require("../db/models/resources.js");
 
 const newResource = async (request, response) => {
-    const { currentYear, AY , branch, degree , subjects } = request.body; 
+  const { currentYear, AY, branch, degree, subjects } = request.body;
 
+  if (!currentYear || !AY || !branch || !degree || !subjects) {
+    response.status(400).json("Fill fields properly!");
+    return;
+  }
 
-    if(!currentYear || !AY || !branch || !degree || !subjects){
-        response.status(400).json('Fill fields properly!');
-        return;
-    }
-
-    /*
+  /*
     const new_resource =  new resources({
         currentYear : currentYear ,
         AY : AY ,
@@ -24,7 +23,7 @@ const newResource = async (request, response) => {
         response.status(500).json(error);
     }
     */
-   try{
+  try {
     let resource = await resources.findOne({ currentYear, AY, branch, degree });
 
     // If the resource does not exist, create a new one
@@ -59,28 +58,35 @@ const newResource = async (request, response) => {
     // Save the resource to the database
     await resource.save();
 
-    response.status(200).send({ message: 'Resource created successfully' });
+    response.status(200).send({ message: "Resource created successfully" });
   } catch (err) {
     console.error(err);
-    response.status(500).send({ message: 'Internal server error' });
+    response.status(500).send({ message: "Internal server error" });
   }
-}
+};
 
-const updateResource = async(request, response)=>{
-    try {
-        const data = request.body._id;
-        const answer = await resources.findByIdAndUpdate({_id : data  , 'subjects._id' : data.subjects._id  , } , { $set: { 'subjects.$.sub_name' : data.subjects.sub_name , 'subjects.$.sources' : data.subjects.sources } },{new : true});
-    
-        if(!answer)
-            return response.status(404).json({ error: `No resource found` });
-        return response.status(200).json({ answer } );
+const updateResource = async (request, response) => {
+  try {
+    const data = request.body._id;
+    const answer = await resources.findByIdAndUpdate(
+      { _id: data, "subjects._id": data.subjects._id },
+      {
+        $set: {
+          "subjects.$.sub_name": data.subjects.sub_name,
+          "subjects.$.sources": data.subjects.sources,
+        },
+      },
+      { new: true }
+    );
 
-    } catch (error) {
-        console.log(error);
-        return response.status(500).json({ error: "Something went wrong" });
-    }
-}
-
+    if (!answer)
+      return response.status(404).json({ error: `No resource found` });
+    return response.status(200).json({ answer });
+  } catch (error) {
+    console.log(error);
+    return response.status(500).json({ error: "Something went wrong" });
+  }
+};
 
 async function deleteResource(req, res) {
   const { AY, year, branch, degree, sub_name, content } = req.body;
@@ -91,7 +97,7 @@ async function deleteResource(req, res) {
         AY,
         degree,
         branch,
-        "currentYear": year,
+        currentYear: year,
         "subjects.sub_name": sub_name,
         "subjects.sources.title": content,
       },
@@ -114,19 +120,17 @@ async function deleteResource(req, res) {
   }
 }
 
-
 const getResource = async (request, response) => {
-    // const { AY ,degree , branch , currentYear } = request.body;
-    try {
-        const result = await resources.findOne(request.query);
-        if(result)
-            response.status(200).json(result);
-        else{
-            response.status(400).json({error: "resources not found"});
-        }
-    } catch (error) {
-        response.status(500).json(error);
+  // const { AY ,degree , branch , currentYear } = request.body;
+  try {
+    const result = await resources.findOne(request.query);
+    if (result) response.status(200).json(result);
+    else {
+      response.status(400).json({ error: "resources not found" });
     }
-}
+  } catch (error) {
+    response.status(500).json(error);
+  }
+};
 
-module.exports = { newResource , updateResource , getResource, deleteResource}
+module.exports = { newResource, updateResource, getResource, deleteResource };

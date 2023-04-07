@@ -10,6 +10,7 @@ const db = require('./db/connection');
 const Routes = require('./routes/Routes.js');
 const bodyparser = require("body-parser");
 const morgan = require('morgan');
+// const user = require('./db/models/userSchema.js');
 
 app.use(express.json());
 app.use(morgan("common"));
@@ -206,17 +207,28 @@ function checkUserAndGenerateToken(data, req, res) {
 }
 
 
-app.put('/user', async (req, res) => {
+app.patch('/profile', async (req, res) => {
     try {
         const data = req.body;
         if(!data)
             return res.status(422).json({error : "Please fill the fields properly"})
         //console.log(data);
-        answer = await User.findOneAndUpdate({ _id: data._id });
+        answer = await user.findOneAndUpdate({ mail: data.mail }, data, { new : true});
         if (!answer)
-            return res.status(404).json({ error: `No record found with id : ${data._id}`})
-        return res.status(200).json({ answer })
+            return res.status(404).json({ error: `No record found with mail : ${data.mail}`})
+        return res.status(200).json(answer)
     } catch (error) {
         return res.status(500).json({ error: "Something went wrong" })
+    }
+})
+
+
+app.get('/profile', async(req, res) => {
+    try{
+        const answer = await user.findById(req.query.id);
+        return res.status(200).json(answer);
+    }
+    catch(error){
+        return res.status(500).json({ error: "Something went wrong" });
     }
 })
