@@ -26,14 +26,14 @@ const newConversation = async (request, response) => {
 }
 
 
-const getConversation = async (request, response) => {
-    try {
-        const result = await conversation.findOne({ participants: { $all: [ request.body.senderId, request.body.receiverId] }});
-        response.status(200).json(result);
-    } catch (error) {
-        response.status(500).json(error);
-    }
-}
+// const getConversation = async (request, response) => {
+//     try {
+//         const result = await conversation.findOne({ participants: { $all: [ request.body.senderId, request.body.receiverId] }});
+//         response.status(200).json(result);
+//     } catch (error) {
+//         response.status(500).json(error);
+//     }
+// }
 
 
 // addNewMessage function to add a new message to a conversation
@@ -93,4 +93,48 @@ const updateSeenBy = async (req, res) => {
       }
     };
 
-module.exports = { newConversation, getConversation , newMessage , updateSeenBy }
+// GET /conversation route to retrieve conversations for a particular user
+const getConversation = async (req, res) => {
+  const userId = req.body.id; // Get user id from req.body
+
+  if (!userId) {
+    return res.status(400).json({ error: 'User id is required' });
+  }
+
+  try {
+    // Find all conversations where the given userId is involved
+    const conversations = await conversation.find({ participants: userId })
+      .sort({ updatedAt: -1 }) // Sort by updatedAt field in descending order (recent conversations first)
+      .populate('participants', 'first_name last_name photo') // Populate participants field with first_name, last_name, and photo fields
+      .exec();
+
+    // Extract user details from conversations
+    const userConversations = conversations.map(conversation => {
+      // Extract relevant details from conversation object
+      const participants = conversation.participants.filter(participant => participant._id.toString() !== userId); // Exclude the logged-in user from participants
+      const lastMessage = conversation.messages[conversation.messages.length - 1]; // Extract last message from messages array
+      const messages = conversation.messages;
+      // Extract first name, last name, and photo from participants
+      const userData = participants.map(participant => ({
+        first_name: participant.first_name,
+        last_name: participant.last_name,
+        photo: participant.photo
+      }));
+
+      // Return conversation details with user details and last message
+      return {
+        userData,
+        messages,
+        last_message: lastMessage ? lastMessage.content : null, // Extract content from last message
+        updated_at: conversation.updatedAt
+      };
+    });
+
+    res.json(userConversations);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Failed to get user conversations' });
+  }
+}
+
+module.exports = { newConversation, getConversation , newMessage , updateSeenBy   }
