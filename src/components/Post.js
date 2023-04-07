@@ -1,10 +1,19 @@
 import React, { useState, useEffect } from "react";
+// import mongoose from 'mongoose';
 import axios from "axios";
+// import TextBoxPost from "./TextBoxPost";
+import '../styles/Post.css';
+
 
 const Post = () => {
   const [url, setUrl] = useState(null);
+  //  const [showComponent, setShowComponent] = useState(false);
+
+  //  const handleClick = () => {
+  //    setShowComponent(true);
+  //  };
   const [file, setFile] = useState({
-    owner: "642db39cabeea06e8802f65f",
+    owner: "642db152b92e9a729f808b27",
     content: "",
     type: "image",
     text_description: "",
@@ -44,7 +53,7 @@ const Post = () => {
             alert('Post uploaded successfully');
             setUrl(null);
             setFile({
-              owner: "642db39cabeea06e8802f65f",
+              owner: "642db152b92e9a729f808b27",
               content: "",
               type: "image",
               text_description: "",
@@ -61,21 +70,21 @@ const Post = () => {
       });
   };
 
-  const Image = ({ url }) => {
-    return (
-      <div style={{ width: "100vw", height: "100vh" }}>
-        <img
-          src={url}
-          alt="Img"
-          style={{ width: "100%", height: "100%", objectFit: "contain" }}
-        />
-      </div>
-    );
-  };
+  // const Image = ({ url }) => {
+  //   return (
+  //     <div style={{ width: "100vw", height: "100vh" }}>
+  //       <img
+  //         src={url}
+  //         alt="Img"
+  //         style={{ width: "100%", height: "100%", objectFit: "contain" }}
+  //       />
+  //     </div>
+  //   );
+  // };
 
   return (
     <div>
-      <h1>File Upload Example</h1>
+      {/* <h1>File Upload Example</h1> */}
       <input id="fileInputButton" type="file" onChange={handleFileChange} />
       <label>
         Description:
@@ -89,7 +98,7 @@ const Post = () => {
       </label>
 
       <button onClick={handleSubmit}>Upload Image</button>
-      <Image url="http://localhost:8000/file/1680810061199-blog-lotus-gfa2ffdb38_1920.jpg" />
+      {/* <Image url="http://localhost:8000/file/1680858799615-blog-lotus-gfa2ffdb38_1920.jpg" /> */}
     </div>
   );
 };

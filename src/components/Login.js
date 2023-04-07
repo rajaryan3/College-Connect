@@ -20,27 +20,44 @@ function Login({ currForm }) {
     }
 
     return (
-        <>
-            <div className='container-login'>
-                <h1 className='heading' >Welcome to College Connect</h1>
+      <>
+        <div className="container-login">
+          <h1 className="heading">Welcome to College Connect</h1>
 
-                <form className="form-login" onSubmit={handleSubmit} method="post">
-                    <h1>Login</h1>
+          <form className="form-login" onSubmit={handleSubmit} method="post">
+            <h1>Login</h1>
 
-                    <label htmlFor="email"></label>
-                    <input type="email" name="email" id="email" placeholder="College Email" onChange={(e) => setEmail(e.target.value)} required />
+            <label htmlFor="email"></label>
+            <input
+              type="email"
+              name="email"
+              id="email"
+              placeholder="College Email"
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
 
-                    <label htmlFor="password"></label>
-                    <input type="password" name="password" id="password" placeholder="Password" onChange={(e) => setPassword(e.target.value)} required />
+            <label htmlFor="password"></label>
+            <input
+              type="password"
+              name="password"
+              id="password"
+              placeholder="Password"
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
 
-                    {/* <span>Forgot Password</span> */}
-                    <button type='submit'>Login</button>
-                    <button onClick={() => currForm('register')}>Don't have account? Register Here.</button>
-                </form>
+            {/* <span>Forgot Password</span> */}
+            <button className="bluebutton" type="submit">
+              Login
+            </button>
+            <button className="bluebutton" onClick={() => currForm("register")}>
+              Don't have account? Register Here.
+            </button>
+          </form>
+        </div>
 
-            </div>
-
-            {/* <form onSubmit={handleSubmit} method='post'>
+        {/* <form onSubmit={handleSubmit} method='post'>
 
                 <label htmlFor="email">Email</label>
                 <input type="email" name="email" id="email" placeholder="enter your college email" onChange={(e) => setEmail(e.target.value)} />
@@ -53,9 +70,8 @@ function Login({ currForm }) {
                 <button type='submit'>Submit</button>
 
             </form> */}
-
-        </>
-    )
+      </>
+    );
 }
 
 export default Login

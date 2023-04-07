@@ -1,0 +1,52 @@
+.subject-button {
+  display: flex;
+  margin: 0 auto;
+  font-size: 1.5rem;
+  padding: 1rem 2rem;
+  margin-top:1rem;
+  background-color:#ee6c4d;
+  /* color: #000000; */
+  color:white;
+  border: 2px solid black;
+  border-radius: 4px;
+  max-width:600px;
+}
+
+.subject-button:hover {
+  background-color: #250e65;
+}
+
+/* body {
+    background-image:url('C:/Users/SAHIL JAISWAL/Downloads/lukas-blazek-GnvurwJsKaY-unsplash.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    /* filter: blur(5px); */
+    /* backdrop-filter: blur(8px);
+} */ 
+
+.resource-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.card {
+  display: flex;
+  border-radius: 10px;
+  border:1px solid black;
+  flex-direction: column;
+}
+
+.card-title {
+  margin-bottom: 10px;
+}
+
+.card-link {
+  margin-bottom: 10px;
+}
+
+.deleteButton {
+  /* margin-top: auto; */
+  margin-left:80%;
+}

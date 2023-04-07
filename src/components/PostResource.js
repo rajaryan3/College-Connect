@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { NavLink } from "react-router-dom";
 
 const PostResource = () => {
   const [formData, setFormData] = useState({
@@ -43,47 +42,67 @@ const PostResource = () => {
     }));
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    axios
-      .post("http://localhost:8000/resources", formData)
-      .then((response) => {
-        console.log(response);
-        setFormData({
-          currentYear: "TY",
-          AY: "2024",
-          branch: "Computer",
-          degree: "BTech",
-          subjects: [
-            {
-              sub_name: "",
-              sources: [
-                {
-                  title: "",
-                  linkOrFileUpload: "",
-                  type: "",
-                  posted_by: "",
-                },
-              ],
-            },
-          ],
-        });
-        alert("Post submitted successfully!");
-        // axios.get("http://localhost:8000/resources", {
-        //   params: {
-        //     currentYear: "TY",
-        //     AY: "2024",
-        //     branch: "Computer",
-        //     degree: "BTech",
-        //   }
-        // }).then((response) => {
-        //   setResources(response.data);
-        // });
-      })
-      .catch((error) => {
-        console.log(error);
-        alert("An error occurred while submitting the post.");
+    try {
+      const fileData = event.target.elements.linkOrFileUpload.files[0];
+      const form = new FormData();
+      form.append("file", fileData, fileData.name);
+      const response = await axios.post(
+        "http://localhost:8000/file/upload",
+        form,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+      console.log(response.data);
+      const imageUrl = response.data.imageUrl;
+      const updatedFormData = {
+        ...formData,
+        subjects: [
+          {
+            ...formData.subjects[0],
+            sources: [
+              {
+                ...formData.subjects[0].sources[0],
+                linkOrFileUpload: imageUrl,
+              },
+            ],
+          },
+        ],
+      };
+      const postResponse = await axios.post(
+        "http://localhost:8000/resources",
+        updatedFormData
+      );
+      console.log(postResponse);
+      alert("Post submitted successfully!");
+      setFormData({
+        currentYear: "TY",
+        AY: "2024",
+        branch: "Computer",
+        degree: "BTech",
+        subjects: [
+          {
+            sub_name: "",
+            sources: [
+              {
+                title: "",
+                linkOrFileUpload: "",
+                type: "",
+                posted_by: "",
+              },
+            ],
+          },
+        ],
       });
+      event.target.elements.linkOrFileUpload.value = null;
+    } catch (error) {
+      console.log(error);
+      alert("An error occurred while submitting the post.");
+    }
   };
 
   return (
@@ -109,15 +128,12 @@ const PostResource = () => {
           />
         </label>
         <br />
-        <label>
-          Link:
-          <input
-            type="text"
-            name="linkOrFileUpload"
-            value={formData.subjects[0].sources[0].linkOrFileUpload}
-            onChange={handleInputChange}
-          />
-        </label>
+        <input
+          type="file"
+          name="linkOrFileUpload"
+          accept=".pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx,.txt"
+          onChange={handleInputChange}
+        />
         <br />
         <label>
           Type:
@@ -129,6 +145,7 @@ const PostResource = () => {
           />
         </label>
         <br />
+
         <label>
           Posted By:
           <input
@@ -139,13 +156,17 @@ const PostResource = () => {
           />
         </label>
         <br />
-        <button type="submit">Submit</button>
-        <NavLink to="http://localhost:3000/resources">
-          Resources Page
-        </NavLink>
+        <button
+          style={{ marginLeft: "30px" }}
+          type="submit"
+          className="btn btn-outline-primary"
+        >
+          Submit
+        </button>
       </form>
     </div>
   );
 };
 
 export default PostResource;
+       
