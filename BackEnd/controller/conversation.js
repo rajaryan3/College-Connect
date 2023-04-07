@@ -95,8 +95,8 @@ const updateSeenBy = async (req, res) => {
 
 // GET /conversation route to retrieve conversations for a particular user
 const getConversation = async (req, res) => {
-  const userId = req.body.id; // Get user id from req.body
-
+  const userId = req.query.id; // Get user id from req.body
+  console.log( 'id is :'+ userId)
   if (!userId) {
     return res.status(400).json({ error: 'User id is required' });
   }
