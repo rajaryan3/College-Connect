@@ -52,15 +52,6 @@ const deletePost = async(req ,res)=>{
     }
 }
 
-// const getPosts = async (request, response) => {
-//     try {
-//         const result = await Post.find();
-//         response.status(200).json(result);
-//     } catch (error) {
-//         response.status(500).json(error);
-//     }
-// }
-
 const getPosts = async (request, response) => {
     try {
         const result = await Post.find().populate({
