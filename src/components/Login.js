@@ -1,9 +1,13 @@
 import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom';
 import "./Login.css"
 
 function Login({ currForm }) {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
+
+    // const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const navigate = useNavigate();
 
     function handleSubmit(e) {
         e.stopPropagation();
@@ -17,6 +21,22 @@ function Login({ currForm }) {
         }
 
         console.log(obj)
+
+        // Make API call to backend for validation and set isLoggedIn based on response
+        // Example: const response = await fetch('/api/login', { method: 'POST', body: formData });
+        //          setIsLoggedIn(response.ok);
+
+        // For the purpose of this example, we'll set isLoggedIn to true
+        // setIsLoggedIn(true);
+        navigate('/home');
+
+        // if (isLoggedIn) {
+        //     // redirect to home page on successful login
+        //     navigate('/home');
+        // } else {
+        //     // show an alert for invalid credentials
+        //     alert('Invalid credentials');
+        // }
     }
 
     return (
@@ -39,21 +59,6 @@ function Login({ currForm }) {
                 </form>
 
             </div>
-
-            {/* <form onSubmit={handleSubmit} method='post'>
-
-                <label htmlFor="email">Email</label>
-                <input type="email" name="email" id="email" placeholder="enter your college email" onChange={(e) => setEmail(e.target.value)} />
-                <br />
-
-                <label htmlFor="password">Password</label>
-                <input type="password" name="password" id="password" placeholder="enter your password" onChange={(e) => setPassword(e.target.value)} />
-                <br />
-
-                <button type='submit'>Submit</button>
-
-            </form> */}
-
         </>
     )
 }

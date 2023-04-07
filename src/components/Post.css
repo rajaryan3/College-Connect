@@ -1,0 +1,41 @@
+.post-section {
+  width: 70pc;
+  margin: auto;
+}
+
+.post-container {
+  width: 50pc;
+  margin: 5rem auto;
+}
+
+.post-header {
+  display: flex;
+  align-items: center;
+}
+
+.post-user-img {
+  width: 80px;
+  height: 80px;
+  border-radius: 100pc;
+}
+
+.post-user-details {
+  margin-left: 15px;
+  text-align: left;
+}
+
+.post-content {
+  margin-top: 15px;
+}
+
+.post-image {
+  display: flex;
+  margin: auto;
+  width: 50pc;
+  height: 30pc;
+}
+
+.post-description {
+  margin-top: 15px;
+  text-align: left;
+}
