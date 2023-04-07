@@ -52,14 +52,25 @@ const deletePost = async(req ,res)=>{
     }
 }
 
+// const getPosts = async (request, response) => {
+//     try {
+//         const result = await Post.find();
+//         response.status(200).json(result);
+//     } catch (error) {
+//         response.status(500).json(error);
+//     }
+// }
+
 const getPosts = async (request, response) => {
     try {
-        const result = await Post.find();
+        const result = await Post.find().populate({
+            path: 'owner',
+            select: 'first_name last_name current_year branch'
+        });
         response.status(200).json(result);
     } catch (error) {
         response.status(500).json(error);
     }
 }
-
 
 module.exports = { newPost , deletePost , getPosts }
