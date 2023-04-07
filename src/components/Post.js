@@ -7,7 +7,7 @@ const Post = () => {
     owner: "642db39cabeea06e8802f65f",
     content: "",
     type: "image",
-    text_description: "FirstPic",
+    text_description: "",
     like_cnt: 0,
   });
 
@@ -24,7 +24,7 @@ const Post = () => {
   const handleSubmit = () => {
     const formData = new FormData();
     formData.append("file", file.content);
-
+    console.log(`File content before : ${file.content}`);
     axios
       .post("http://localhost:8000/file/upload", formData, {
         headers: {
@@ -41,6 +41,16 @@ const Post = () => {
           .post("http://localhost:8000/post", postData)
           .then((response) => {
             console.log(response.data);
+            alert('Post uploaded successfully');
+            setUrl(null);
+            setFile({
+              owner: "642db39cabeea06e8802f65f",
+              content: "",
+              type: "image",
+              text_description: "",
+              like_cnt: "",
+            });
+            document.getElementById("fileInputButton").value = '';
           })
           .catch((error) => {
             console.log(error);
@@ -66,7 +76,17 @@ const Post = () => {
   return (
     <div>
       <h1>File Upload Example</h1>
-      <input type="file" onChange={handleFileChange} />
+      <input id="fileInputButton" type="file" onChange={handleFileChange} />
+      <label>
+        Description:
+        <input
+          type="text"
+          value={file.text_description}
+          onChange={(e) =>
+            setFile({ ...file, text_description: e.target.value })
+          }
+        />
+      </label>
 
       <button onClick={handleSubmit}>Upload Image</button>
       <Image url="http://localhost:8000/file/1680810061199-blog-lotus-gfa2ffdb38_1920.jpg" />
