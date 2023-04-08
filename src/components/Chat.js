@@ -6,7 +6,7 @@ import "../styles/chat.css"
 const Chat = () => {
   return (
     <div>
-      <h1>My Chat App</h1>
+      {/* <h1 style={{textAlign:"center"}}>My Chat App</h1> */}
       <ConversationList />
     </div>
   );

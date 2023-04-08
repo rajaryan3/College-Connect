@@ -38,7 +38,7 @@ const ConversationList = () => {
         />
       ) : (
         <>
-          <h1>User-Contact List</h1>
+          {/* <h1>User-Contact List</h1> */}
           {/* <ul>
             {conversations.map((conversation) => (
               <li key={conversation.userData[0]._id}>
@@ -55,43 +55,47 @@ const ConversationList = () => {
               </li>
             ))}
           </ul> */}
-          <div class="center">
-            <div class="contacts">
-              <i class="fas fa-bars fa-2x"></i>
-              <h2>
-                Contacts
-              </h2>
+          <div className="center">
+            <div className="contacts" style={{display:"flex", flexDirection:"column", minWidth:"700px"}}>
+              <i className="fas fa-bars fa-2x"></i>
+              <h2 style={{textAlign:"center"}}>Contacts</h2>
               {/* <a href="./chat.html">
-                <div class="contact">
-                  <div class="pic rogers"></div>
-                  <div class="badge">
+                <div className="contact">
+                  <div className="pic rogers"></div>
+                  <div className="badge">
                     14
                   </div>
-                  <div class="name">
+                  <div className="name">
                     Steve Rogers
                   </div>
-                  <div class="message">
+                  <div className="message">
                     That is America's ass 🇺🇸🍑
                   </div>
                 </div>
               </a> */}
 
               {conversations.map((conversation) => (
-                <a key={conversation.userData[0]._id} onClick={() => handleConversationClick(conversation)} >
-                  <div class="contact">
-                    <div class="pic"><img style={{backgroundImage : `{conversation.userData[0].photo}`}} alt="Example Image" /></div>
-                    <div class="badge">
-                      14
+                <button
+                  style={{marginBottom:"15px"}}
+                  key={conversation.userData[0]._id}
+                  onClick={() => handleConversationClick(conversation)}
+                >
+                  <div className="contact">
+                    <div className="pic">
+                      <img
+                        src={conversation.userData[0].photo}
+                        style={{maxWidth:"100%"}}
+                        alt="Example"
+                      />
                     </div>
-                    <div class="name">
-                      {conversation.userData[0].first_name}{' '}
+                    {/* <div className="badge">14</div> */}
+                    <div className="name">
+                      {conversation.userData[0].first_name}{" "}
                       {conversation.userData[0].last_name}
                     </div>
-                    <div class="message">
-                      {conversation.last_message}
-                    </div>
+                    <div className="message">{conversation.last_message}</div>
                   </div>
-                </a>
+                </button>
               ))}
             </div>
           </div>

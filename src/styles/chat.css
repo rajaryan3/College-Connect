@@ -38,21 +38,24 @@ a {
 }
 
 .pic {
-    width: 4rem;
+    width: 6rem;
     height: 4rem;
     background-size: cover;
     background-position: center;
     border-radius: 50%;
+    margin-left:4px;
 }
 
 .contact {
     position: relative;
-    margin-bottom: 1rem;
+    margin-bottom: 3rem;
     padding-left: 5rem;
     height: 4.5rem;
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: flex-start;
+    min-width: 600px;
 
 }
 
@@ -64,12 +67,14 @@ a {
 .contact .name {
     font-weight: 500;
     margin-bottom: 0.125rem;
+    margin-left:30px;
 }
 
 .contact .message,
 .contact .seen {
     font-size: 0.9rem;
     color: #999;
+    margin-left:30px;
 }
 
 .contact .badge {
