@@ -1,77 +1,90 @@
-import React, { useState } from 'react'
-import "../styles/Login.css"
+import React, { useState } from "react";
+import axios from "axios";
+import "../styles/Login.css";
 
-function Login({ currForm }) {
-    const [email, setEmail] = useState("")
-    const [password, setPassword] = useState("")
+const Login = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-    function handleSubmit(e) {
-        e.stopPropagation();
-        e.preventDefault();
-        console.log(email);
-        console.log(password);
+  const handleSubmit = async(e) => {
+    e.preventDefault();
+    // console.log(email);
+    // console.log(password);
 
-        const obj = {
-            "email": email,
-            "password": password,
-        }
+    const obj = {
+      mail: email,
+      password: password,
+    };
 
-        console.log(obj)
+    // console.log(obj);
+
+    try {
+      const response = await axios.post("http://localhost:8000/login", obj, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      if (response.data.status === true) {
+        setIsLoggedIn(true);
+        window.location.href = "http://localhost:3000";
+      } else {
+        alert(response.data.errorMessage);
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      alert("Fill correct credentials!");
     }
+  }
 
-    return (
-      <>
-        <div className="container-login">
-          <h1 className="heading">Welcome to College Connect</h1>
+  if (isLoggedIn) {
+    return null;
+  }
 
-          <form className="form-login" onSubmit={handleSubmit} method="post">
-            <h1>Login</h1>
+  return (
+    <>
+      <div className="container-login">
+        <h1 className="heading">Welcome to College Connect</h1>
 
-            <label htmlFor="email"></label>
-            <input
-              type="email"
-              name="email"
-              id="email"
-              placeholder="College Email"
-              onChange={(e) => setEmail(e.target.value)}
-              required
-            />
+        <form className="form-login" onSubmit={handleSubmit}>
+          <h1>Login</h1>
 
-            <label htmlFor="password"></label>
-            <input
-              type="password"
-              name="password"
-              id="password"
-              placeholder="Password"
-              onChange={(e) => setPassword(e.target.value)}
-              required
-            />
+          <label htmlFor="email"></label>
+          <input
+            type="email"
+            name="email"
+            id="email"
+            placeholder="College Email"
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
 
-            {/* <span>Forgot Password</span> */}
-            <button className="bluebutton" type="submit">
-              Login
-            </button>
-            <button className="bluebutton" onClick={() => currForm("register")}>
-              Don't have account? Register Here.
-            </button>
-          </form>
-        </div>
+          <label htmlFor="password"></label>
+          <input
+            type="password"
+            name="password"
+            id="password"
+            placeholder="Password"
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
 
-        {/* <form onSubmit={handleSubmit} method='post'>
+          {/* <span>Forgot Password</span> */}
+          <button className="bluebutton" type="submit">
+            Login
+          </button>
+          <a
+            href="http://localhost:3000/register"
+            style={{ textAlign: "center", textDecoration: "none" }}
+            className="bluebutton"
+          >
+            Don't have an account? Register Here.
+          </a>
+        </form>
+      </div>
+    </>
+  );
+};
 
-                <label htmlFor="email">Email</label>
-                <input type="email" name="email" id="email" placeholder="enter your college email" onChange={(e) => setEmail(e.target.value)} />
-                <br />
-
-                <label htmlFor="password">Password</label>
-                <input type="password" name="password" id="password" placeholder="enter your password" onChange={(e) => setPassword(e.target.value)} />
-                <br />
-
-                <button type='submit'>Submit</button>
-
-            </form> */}
-      </>
-    );
-}
-
-export default Login
+export default Login;
