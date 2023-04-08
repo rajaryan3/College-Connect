@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import ConversationList from './ConversationList';
-
+import "../styles/chat.css"
 
 
 const Chat = () => {
