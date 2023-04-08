@@ -119,14 +119,14 @@ try {
 /* register api */
 app.post("/register", async(req, res) => {
 try {
-    const {user_role , first_name , last_name , mis ,current_year , AY , degree , mail , branch , phone_no  ,professiona_arr , my_description , addon , photo , password } = req.body;
+    const {user_role , first_name , last_name , mis ,current_year , AY , degree , mail , branch , phone_no  , my_description , photo , password } = req.body;
     if ( mail && password ) {
 
     const userexists = await user.findOne({ mail: req.body.mail })
 
         if (!userexists) {
                 var User = new user({
-                    user_role : user_role ,
+                    user_role : 'user' ,
                     first_name:first_name , 
                     last_name:last_name ,
                     mis : mis ,
@@ -136,9 +136,9 @@ try {
                     mail : mail,
                     branch : branch , 
                     phone_no : phone_no  ,
-                    professiona_arr : professiona_arr ,
+                    // professiona_arr : professional_arr ,
                     my_description : my_description ,
-                    addon : addon ,
+                    // addon : addon ,
                     photo :photo ,
                     password:  password
             });
@@ -198,9 +198,10 @@ function checkUserAndGenerateToken(data, req, res) {
     });
     }else {
         res.json({
-            message: 'Login Successfully.',
-            token: token,
-            status: true
+          message: "Login Successfully.",
+          user: data,
+          token: token,
+          status: true,
         });
     }
     });
