@@ -1,42 +1,92 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios"; // Import Axios
+import Footer from "./Footer.js"
 
-const ConversationMessages = ({ conversation, setSelectedConversation , }) => {
-  const handleBackClick = () => {
-    setSelectedConversation(null); // Call setSelectedConversation with null to reset selectedConversation state
+
+const ConversationMessages = ({
+  selectedConversation,
+  setConversation,
+  setSelectedConversation,
+  setNewMessageFlag,
+}) => {
+  const [value, setValue] = useState("");
+  const [url, setUrl] = useState('');
+  const receiverId = selectedConversation.userData[0]._id;
+
+
+  useEffect(() => {
+  // console.log(url);
+    const fd = new FormData();
+    fd.append("file", url);
+    const func = async() => {
+      try {
+        const res = await axios.post(
+          "http://localhost:8000/file/upload",
+          fd,
+          {
+            headers: {
+              "Content-Type": "multipart/form-data",
+            },
+          }
+        );
+        setUrl(res.data.imageUrl);
+        setValue(res.data.imageUrl);
+        // console.log(url,value);
+        // console.log(url);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    func();
+  }, [url]);
+
+
+  const sendText = async () => {
+    if (!value) return;
+
+    let newmessage = {
+      senderId: "64033ea41ca78ed1c90a8363",
+      conversationId: selectedConversation.conversationId,
+      receiverId: receiverId,
+      type: "text",
+      content: value,
+    };
+
+    const uploadNewMessages = async (message) => {
+      try {
+        const response = await axios.put(
+          "http://localhost:8000/conversation",
+          message
+        );
+        const currUser = {
+          user_id: "64033ea41ca78ed1c90a8363",
+          conversation_id: selectedConversation.conversationId,
+        };
+        const response2 = await axios.get(
+          "http://localhost:8000/currentConversation",
+          { params: currUser }
+        );
+        setSelectedConversation(response2.data);
+      
+        console.log(response2.data);
+        setNewMessageFlag((prev) => !prev);
+      } catch (error) {
+        console.error("Error uploading messages:", error);
+      }
+    };
+    uploadNewMessages(newmessage);
+    setValue("");
+    document.getElementById('inputText').value = '';
+    setNewMessageFlag((prev) => !prev);
   };
 
-  const userID = "64033ea41ca78ed1c90a8363"
-  console.log(conversation)
+  const handleBackClick = async () => {
+    setSelectedConversation(null);
+  };
 
-  // <div>
-  //   <h1>Messages</h1>
-  //   <button onClick={handleBackClick}>Back</button>
-  //   <ul>
-  //     {conversation.messages.map((message) => (
-  //       <li key={message._id}>
-  //         <p>{message.content}</p>
-  //         <p>Seen By: {message.seenBy.join(', ')}</p>
-  //         <p>Created At: {message.createdAt}</p>
-  //       </li>
-  //     ))}
-  //   </ul>
-  // </div>
+  
 
-
-  //----------------------------------------------------------------------------------------
-  // <div>
-  //   <h1>Messages</h1>
-  //   <button onClick={handleBackClick}>Back</button>
-  //   <ul>
-  //     {conversation.messages.map((message) => (
-  //       <li key={message._id}>
-  //         <p>{message.content}</p>
-  //         <p>Seen By: {message.seenBy.join(', ')}</p>
-  //         <p>Created At: {message.createdAt}</p>
-  //       </li>
-  //     ))}
-  //   </ul>
-  // </div>
+  const userID = "64033ea41ca78ed1c90a8363";
   return (
     <>
       <div className="chat">
@@ -51,66 +101,37 @@ const ConversationMessages = ({ conversation, setSelectedConversation , }) => {
           <div className="pic">
             <img
               style={{ maxWidth: "100%" }}
-              src={conversation.userData[0].photo}
+              src={selectedConversation.userData[0].photo}
               alt="ChatImg"
             />
           </div>
-          <div className="name">{conversation.userData[0].first_name}</div>
-          <div className="seen">{conversation.updated_at}</div>
+          <div className="name">
+            {selectedConversation.userData[0].first_name}{" "}
+            {selectedConversation.userData[0].last_name}
+          </div>
+          <div className="seen">{selectedConversation.updated_at}</div>
         </div>
         <div className="messages" id="chat">
-          {/* <div className="time">
-            Today at 11:41
-          </div> */}
-          {/* <div className="message parker">
-            Hey, man! What's up, Mr Stark? 👋
-          </div>
-          <div className="message stark">
-            Kid, where'd you come from?
-          </div> */}
-
-          {conversation.messages.map(
-            (message) =>
-              message.senderID == userID ? (
-                <div className="message parker">{message.content}</div>
-              ) : (
-                <div className="message stark">{message.content}</div>
-              )
-
-            // <li key={message._id}>
-            //   <p>{message.content}</p>
-            //   <p>Created At: {message.createdAt}</p>
-            // </li>
+          {selectedConversation.messages.map((message) =>
+            message.senderID === userID ? (
+              <div className="message parker" key={message._id}>
+                {message.content}
+              </div>
+            ) : (
+              <div className="message stark" key={message._id}>
+                {message.content}
+              </div>
+            )
           )}
         </div>
-        <div onClick={() => {alert('Attachment pressed')}}>
-          <img
-            className="attachmentButton"
-            src="https://cdn-icons-png.flaticon.com/512/74/74741.png"
-            style={{ width: "40px", height: "40px" }}
-            alt="attachmentButton"
-          />
-        </div>
-
-        <div className="input">
-          <i className="fas fa-camera"></i>
-          <i className="far fa-laugh-beam"></i>
-          <input
-            placeholder="Type your message here!"
-            type="text"
-            style={{ marginLeft: "20px" }}
-          />
-          {/* <i className="fas fa-microphone"></i> */}
-        </div>
-
-        <div onClick={() => {alert('Send Button pressed')}}>
-          <img
-            className="sendButton"
-            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTsqUJwzScnp9AhxynPsWu-tynVihQvwuqukA&usqp=CAU"
-            alt="sendButton"
-            style={{ width: "45px", height: "32px" }}
-          />
-        </div>
+        <Footer
+          sendText={sendText}
+          value={value}
+          setValue={setValue}
+          // setSelectedConversation={setSelectedConversation}
+          url={url}
+          setUrl={setUrl}
+        />
       </div>
     </>
   );
