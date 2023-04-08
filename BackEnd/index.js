@@ -198,10 +198,17 @@ function checkUserAndGenerateToken(data, req, res) {
     });
     }else {
         res.json({
+<<<<<<< HEAD
           message: "Login Successfully.",
           user: data,
           token: token,
           status: true,
+=======
+            user : data,
+            message: 'Login Successfully.',
+            token: token,
+            status: true
+>>>>>>> 1a644eeaec953c1b6d4f3129b719641f0bda0385
         });
     }
     });
