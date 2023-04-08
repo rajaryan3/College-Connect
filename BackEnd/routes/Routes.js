@@ -1,6 +1,6 @@
 const express = require('express');
 
-const { newMessage , getConversation , newConversation , updateSeenBy } = require('../controller/conversation.js');
+const { newMessage , getConversation , newConversation , updateSeenBy, getCurrentConversation } = require('../controller/conversation.js');
 const { uploadImage, getImage } = require('../controller/file.js');
 const { newPost , deletePost , getPosts } = require('../controller/post');
 const { newResource , updateResource , getResource, deleteResource} = require('../controller/resources')
@@ -13,6 +13,7 @@ const route = express.Router();
 route.post('/conversation',newConversation);
 route.get('/conversation', getConversation);
 route.put('/conversation', newMessage);
+route.get("/currentConversation", getCurrentConversation);
 route.put('/conversation/seenby', updateSeenBy);
 route.post('/post', newPost);
 route.get('/post' , getPosts);

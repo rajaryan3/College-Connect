@@ -252,7 +252,7 @@ const getConversation = async (req, res) => {
     const conversations = await conversation
       .find({ participants: userId })
       .sort({ updatedAt: -1 }) // Sort by updatedAt field in descending order (recent conversations first)
-      .populate("participants", "first_name last_name photo") // Populate participants field with first_name, last_name, and photo fields
+      .populate("participants", "first_name last_name photo _id") // Populate participants field with first_name, last_name, and photo fields
       .exec();
 
     // Extract user details from conversations
@@ -269,6 +269,7 @@ const getConversation = async (req, res) => {
         first_name: participant.first_name,
         last_name: participant.last_name,
         photo: participant.photo,
+        _id: participant._id
       }));
 
       // Return conversation details with user details and last message
@@ -288,4 +289,58 @@ const getConversation = async (req, res) => {
   }
 };
 
-module.exports = { newConversation, getConversation, newMessage, updateSeenBy };
+
+const getCurrentConversation = async (req, res) => {
+  const { user_id, conversation_id } = req.query;
+  console.log(req.query);
+  console.log("user_id is:", user_id);
+  console.log("conversation_id is:", conversation_id);
+  if (!user_id || !conversation_id) {
+    return res
+      .status(400)
+      .json({ error: "User id and conversation id are required" });
+  }
+
+  try {
+    // Find the conversation with the given conversation_id where the given user_id is involved
+    const cnv = await conversation
+      .findOne({ _id: conversation_id, participants: user_id })
+      .populate("participants", "first_name last_name photo _id") // Populate participants field with first_name, last_name, and photo fields
+      .exec();
+
+    if (!cnv) {
+      return res.status(404).json({ error: "Conversation not found" });
+    }
+
+    // Extract user details from conversation
+    const participants = cnv.participants.filter(
+      (participant) => participant._id.toString() !== user_id
+    ); // Exclude the logged-in user from participants
+    const lastMessage = cnv.messages[cnv.messages.length - 1]; // Extract last message from messages array
+    const messages = cnv.messages;
+    // Extract first name, last name, and photo from participants
+    const userData = participants.map((participant) => ({
+      first_name: participant.first_name,
+      last_name: participant.last_name,
+      photo: participant.photo,
+      _id: participant._id,
+    }));
+
+    // Return conversation details with user details and last message
+    const currentConversation = {
+      conversationId: cnv._id,
+      userData,
+      messages,
+      last_message: lastMessage ? lastMessage.content : null, // Extract content from last message
+      updated_at: cnv.updatedAt,
+    };
+
+    res.json(currentConversation);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Failed to get current conversation" });
+  }
+};
+
+
+module.exports = { newConversation, getConversation, newMessage, updateSeenBy, getCurrentConversation };
