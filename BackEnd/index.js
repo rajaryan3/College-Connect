@@ -193,6 +193,7 @@ function checkUserAndGenerateToken(data, req, res) {
     jwt.sign({ user: data.mail, id: data._id }, 'thisisSEMPprojectsbackendbyaryankhose', { expiresIn: '1m' }, (err, token) => {
     if(err) {
         res.status(400).json({
+        user : data,
         status: false,
         errorMessage: err,
     });
