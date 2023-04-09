@@ -1,9 +1,12 @@
+import React, { useRef } from "react";
 // import axios from 'axios';
 
 const Footer = ({ sendText, value, setValue, url, setUrl}) => {
+  const inputTextRef = useRef(null);
   const handleSendClick = async() => {
     sendText();
-    // setValue('');
+    setValue("");
+    inputTextRef.current.value = "";
   }
 
  const handleFileChange = async(event) => {
@@ -39,6 +42,7 @@ const Footer = ({ sendText, value, setValue, url, setUrl}) => {
           <input
             placeholder="Type your message here!"
             type="text"
+            ref={inputTextRef}
             style={{ marginLeft: "20px" }}
           />
           <i class="fas fa-microphone"></i>
