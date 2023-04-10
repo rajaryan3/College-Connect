@@ -1,31 +1,34 @@
 import React, { useRef } from "react";
 // import axios from 'axios';
 
-const Footer = ({ sendText, value, setValue, url, setUrl}) => {
+const Footer = ({ sendText, value, setValue, url, setUrl }) => {
   const inputTextRef = useRef(null);
-  const handleSendClick = async() => {
-    sendText();
-    setValue("");
-    inputTextRef.current.value = "";
-  }
+  const inputFileRef = useRef(null);
 
- const handleFileChange = async(event) => {
-   setUrl(event.target.files[0]);
- }
-  
+  const handleSendClick = async () => {
+    sendText();
+    // setValue("");
+    inputTextRef.current.value = "";
+    inputFileRef.current.value = null;
+  };
+
+  const handleFileChange = async (event) => {
+    setUrl(event.target.files[0]);
+  };
 
   return (
     <>
       <div>
         <input
           type="file"
+          ref={inputFileRef}
           onChange={handleFileChange}
-        //   style={{
-        //     className: "attachmentButton",
-        //     background: `url(https://cdn-icons-png.flaticon.com/512/74/74741.png) no-repeat center center`,
-        //     width: "40px",
-        //     height: "40px",
-        //   }}
+          //   style={{
+          //     className: "attachmentButton",
+          //     background: `url(https://cdn-icons-png.flaticon.com/512/74/74741.png) no-repeat center center`,
+          //     width: "40px",
+          //     height: "40px",
+          //   }}
         />
 
         <div

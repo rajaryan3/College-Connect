@@ -2,11 +2,12 @@ import React, { useState } from "react";
 import axios from "axios";
 
 const PostResource = () => {
+  const userObj = JSON.parse(localStorage.getItem("curr_user"));
   const [formData, setFormData] = useState({
-    currentYear: "TY",
-    AY: "2024",
-    branch: "Computer",
-    degree: "BTech",
+    currentYear: userObj.current_year,
+    AY: userObj.AY,
+    branch: userObj.branch,
+    degree: userObj.degree,
     subjects: [
       {
         sub_name: "",
@@ -68,6 +69,7 @@ const PostResource = () => {
               {
                 ...formData.subjects[0].sources[0],
                 linkOrFileUpload: imageUrl,
+                posted_by: userObj._id
               },
             ],
           },
@@ -80,10 +82,10 @@ const PostResource = () => {
       console.log(postResponse);
       alert("Post submitted successfully!");
       setFormData({
-        currentYear: "TY",
-        AY: "2024",
-        branch: "Computer",
-        degree: "BTech",
+        currentYear: userObj.current_year,
+        AY: userObj.AY,
+        branch: userObj.branch,
+        degree: userObj.degree,
         subjects: [
           {
             sub_name: "",
@@ -146,7 +148,7 @@ const PostResource = () => {
         </label>
         <br />
 
-        <label>
+        {/* <label>
           Posted By:
           <input
             type="text"
@@ -155,7 +157,7 @@ const PostResource = () => {
             onChange={handleInputChange}
           />
         </label>
-        <br />
+        <br /> */}
         <button
           style={{ marginLeft: "30px" }}
           type="submit"

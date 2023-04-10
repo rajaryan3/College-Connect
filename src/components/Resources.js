@@ -4,9 +4,11 @@ import '../styles/Resources.css'
 // import PostResource from "./PostResource";
 // import DeleteResource from './DeleteResource'
 
-const ResourceList = () => {
+const Resources = () => {
   const [resources, setResources] = useState([]);
   const [currentSubject, setCurrentSubject] = useState(null);
+  const userObj = JSON.parse(localStorage.getItem("curr_user"));
+
 
   const handleDelete = async (props) => {
     try {
@@ -18,10 +20,10 @@ const ResourceList = () => {
         alert("Resource deleted successfully");
         const res = await axios.get("http://localhost:8000/resources", {
           params: {
-            AY: "2024",
-            degree: "BTech",
-            branch: "Computer",
-            currentYear: "TY",
+            AY: userObj.AY,
+            degree: userObj.degree,
+            branch: userObj.branch,
+            currentYear: userObj.current_year,
           },
         });
         // setResources(res.data);
@@ -39,10 +41,10 @@ const ResourceList = () => {
 
   useEffect(() => {
     const user = {
-      AY: "2024",
-      degree: "BTech",
-      branch: "Computer",
-      currentYear: "TY",
+      AY: userObj.AY,
+      degree: userObj.degree,
+      branch: userObj.branch,
+      currentYear: userObj.current_year,
     };
     const getResources = async () => {
       try {
@@ -81,15 +83,14 @@ const ResourceList = () => {
                 View Resource
               </a>
               <button
-                
                 type="submit"
                 className="btn btn-danger deleteButton"
                 onClick={() =>
                   handleDelete({
-                    AY: "2024",
-                    branch: "Computer",
-                    degree: "BTech",
-                    year: "TY",
+                    AY: userObj.AY,
+                    degree: userObj.degree,
+                    branch: userObj.branch,
+                    year: userObj.current_year,
                     sub_name: currentSubject.sub_name,
                     content: source.title,
                   })
@@ -141,4 +142,4 @@ const ResourceList = () => {
   );
 };
 
-export default ResourceList;
+export default Resources;

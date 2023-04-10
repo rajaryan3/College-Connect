@@ -7,9 +7,11 @@ const ConversationList = () => {
   const [conversations, setConversations] = useState([]);
   const [selectedConversation, setSelectedConversation] = useState(null);
   const [NewMessageFlag, setNewMessageFlag] = useState(null);
+  const userObj = JSON.parse(localStorage.getItem("curr_user"));
+
 
   useEffect(() => {
-    const userData = { id: "64033ea41ca78ed1c90a8363" };
+    const userData = { id: userObj._id };
     const fetchConversations = async () => {
       try {
         const response = await axios.get("http://localhost:8000/conversation", {
@@ -40,7 +42,6 @@ const ConversationList = () => {
         />
       ) : (
         <>
-          
           <div className="center">
             <div
               className="contacts"

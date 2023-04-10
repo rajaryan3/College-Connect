@@ -1,11 +1,15 @@
 // import { useState } from 'react'
 import { BrowserRouter, Routes, Route} from "react-router-dom";
-import { MainHeader, Home, Login, Register, Profile, Chat, Resources, PostResource  } from "./path";
+import { MainHeader, Home, Login, Register, Profile, Chat, Resources, PostResource, LogOut  } from "./path";
+import React, {useState} from "react";
 import './App.css'
 
 
 function App() {
   
+  // const [userObj, setUserObj] = useState({});
+  // localStorage.setItem("curr_user", JSON.stringify(userObj));
+
   return (
     <BrowserRouter>
       <Routes>
@@ -13,10 +17,14 @@ function App() {
           <Route index element={<Home />} />
           <Route path="login" element={<Login />} />
           <Route path="register" element={<Register />} />
-          <Route path="profile" element={<Profile />} />
+          <Route path="profile" element={<Profile/>} />
           <Route path="chat" element={<Chat />} />
           <Route path="resources" element={<Resources />} />
-          <Route path="addresources" element={<PostResource/>}/>
+          <Route
+            path="addresources"
+            element={<PostResource />}
+          />
+          <Route path="logout" element={<LogOut/>}/>
           {/* <Route path="*" element={<ErrorPage/>}/> */}
         </Route>
       </Routes>

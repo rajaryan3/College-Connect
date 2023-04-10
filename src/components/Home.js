@@ -7,8 +7,8 @@ const Home = () => {
     <div>
         <h1 style={{textAlign:"center"}}>HomePage</h1>
         <br></br>
-        <Post/>
-        <TextBoxPost/>
+        <Post />
+        <TextBoxPost />
     </div>
   );
 }

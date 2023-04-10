@@ -170,7 +170,7 @@ const Register = () => {
           </select>
           <br />
 
-          <label htmlFor="AY">Academic Year</label>
+          <label htmlFor="AY">Year of Passing</label>
           <select
             name="AY"
             value={formData.AY}
@@ -179,10 +179,10 @@ const Register = () => {
           >
             <option value="select">select</option>
             {/* <option value="2021 - 2022">2021 - 2022</option> */}
-            <option value="2022 - 2023">2022 - 2023</option>
-            <option value="2023 - 2024">2023 - 2024</option>
-            <option value="2021 - 2022">2024 - 2025</option>
-            <option value="2021 - 2022">2025 - 2026</option>
+            <option value="2023">2023</option>
+            <option value="2024">2024</option>
+            <option value="2025">2025</option>
+            <option value="2026">2026</option>
 
             {/* <option value="FY"></option> */}
           </select>
@@ -196,8 +196,8 @@ const Register = () => {
             required
           >
             <option value="select">select</option>
-            <option value="B.Tech">B.Tech</option>
-            <option value="M.Tech">M.Tech</option>
+            <option value="BTech">BTech</option>
+            <option value="MTech">MTech</option>
             {/* <option value="FY"></option> */}
           </select>
           <br />

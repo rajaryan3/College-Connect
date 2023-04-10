@@ -7,13 +7,15 @@ import '../styles/Post.css';
 
 const Post = () => {
   const [url, setUrl] = useState(null);
+  const userObj = JSON.parse(localStorage.getItem("curr_user"));
+
   //  const [showComponent, setShowComponent] = useState(false);
 
   //  const handleClick = () => {
   //    setShowComponent(true);
   //  };
   const [file, setFile] = useState({
-    owner: "642db152b92e9a729f808b27",
+    owner: userObj._id,
     content: "",
     type: "image",
     text_description: "",
@@ -53,7 +55,7 @@ const Post = () => {
             alert('Post uploaded successfully');
             setUrl(null);
             setFile({
-              owner: "642db152b92e9a729f808b27",
+              owner: userObj._id,
               content: "",
               type: "image",
               text_description: "",

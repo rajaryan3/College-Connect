@@ -5,6 +5,7 @@ import "../styles/Login.css";
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  // const [userObj, setUserObj] = useState({});
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const handleSubmit = async(e) => {
@@ -17,7 +18,7 @@ const Login = () => {
       password: password,
     };
 
-    // console.log(obj);
+    console.log(obj);
 
     try {
       const response = await axios.post("http://localhost:8000/login", obj, {
@@ -28,7 +29,12 @@ const Login = () => {
 
       if (response.data.status === true) {
         setIsLoggedIn(true);
-        window.location.href = "http://localhost:3000";
+        // console.log(response.data.user);
+        localStorage.setItem("curr_user", JSON.stringify(response.data.user));
+        document.getElementById('loginDocId').style.display = "none";
+        document.getElementById("registerDocId").style.display = "none";
+
+        // window.location.href = "http://localhost:3000";
       } else {
         alert(response.data.errorMessage);
       }

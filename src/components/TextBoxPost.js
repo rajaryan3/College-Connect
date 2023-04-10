@@ -18,6 +18,7 @@ function PostFrame({ post }) {
 
 function TextBoxPost() {
   const [posts, setPosts] = useState([]);
+  
 
   useEffect(() => {
     axios
