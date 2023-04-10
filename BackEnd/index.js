@@ -233,3 +233,30 @@ app.get('/profile', async(req, res) => {
         return res.status(500).json({ error: "Something went wrong" });
     }
 })
+
+app.get('/users', async (req, res) => {
+    try {
+        const query = req.query;
+
+        // Build query object for degree, current year, and branch
+        const queryObj = {};
+        if (query.degree) {
+            queryObj.degree = query.degree;
+        }
+        if (query.current_year) {
+            queryObj.current_year = query.current_year;
+        }
+        if (query.branch) {
+            queryObj.branch = query.branch;
+        }
+
+        // Find users based on query
+        const users = await user.find(queryObj, { password: 0 }).sort({ AY: -1 , mis: 1 });
+
+        // Send response
+        return res.json({ users });
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({ error: 'Server error' });
+    }
+});
