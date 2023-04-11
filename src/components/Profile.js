@@ -5,8 +5,8 @@ import "../App.css";
 
 function Profile() {
   // const [data, setData] = useState(null);
-  const userObj = JSON.parse(localStorage.getItem('curr_user'));
-  console.log(userObj);
+  const userObj = JSON.parse(sessionStorage.getItem('curr_user'));
+  // console.log(userObj);
   const [data, setData] = useState({
     user_role: "",
     first_name: "",

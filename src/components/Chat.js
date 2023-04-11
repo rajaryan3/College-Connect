@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import ConversationList from './ConversationList';
-import "../styles/chat.css"
+// import ChatHome from './ChatHome';
+import "../styles/chat.css";
 
 
 const Chat = () => {
@@ -8,6 +9,7 @@ const Chat = () => {
     <div>
       {/* <h1 style={{textAlign:"center"}}>My Chat App</h1> */}
       <ConversationList />
+      {/* <ChatHome/> */}
     </div>
   );
 };

@@ -7,7 +7,7 @@ const ConversationList = () => {
   const [conversations, setConversations] = useState([]);
   const [selectedConversation, setSelectedConversation] = useState(null);
   const [NewMessageFlag, setNewMessageFlag] = useState(null);
-  const userObj = JSON.parse(localStorage.getItem("curr_user"));
+  const userObj = JSON.parse(sessionStorage.getItem("curr_user"));
 
 
   useEffect(() => {
@@ -49,6 +49,7 @@ const ConversationList = () => {
                 display: "flex",
                 flexDirection: "column",
                 minWidth: "700px",
+                
               }}
             >
               <i className="fas fa-bars fa-2x"></i>

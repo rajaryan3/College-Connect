@@ -7,7 +7,7 @@ import '../styles/Resources.css'
 const Resources = () => {
   const [resources, setResources] = useState([]);
   const [currentSubject, setCurrentSubject] = useState(null);
-  const userObj = JSON.parse(localStorage.getItem("curr_user"));
+  const userObj = JSON.parse(sessionStorage.getItem("curr_user"));
 
 
   const handleDelete = async (props) => {

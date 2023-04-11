@@ -6,9 +6,9 @@ const Header = () => {
   return (
     <div className="header">
       <NavLink to="/">Home</NavLink>
-      <NavLink to="/login" id="loginDocId">
+      {/* <NavLink to="/login" id="loginDocId">
         Login
-      </NavLink>
+      </NavLink> */}
       <NavLink to="/register" id="registerDocId">
         Register
       </NavLink>

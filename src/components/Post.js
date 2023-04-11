@@ -7,7 +7,7 @@ import '../styles/Post.css';
 
 const Post = () => {
   const [url, setUrl] = useState(null);
-  const userObj = JSON.parse(localStorage.getItem("curr_user"));
+  const userObj = JSON.parse(sessionStorage.getItem("curr_user"));
 
   //  const [showComponent, setShowComponent] = useState(false);
 

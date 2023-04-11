@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import "../styles/Login.css";
 
+
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -30,11 +31,11 @@ const Login = () => {
       if (response.data.status === true) {
         setIsLoggedIn(true);
         // console.log(response.data.user);
-        localStorage.setItem("curr_user", JSON.stringify(response.data.user));
-        document.getElementById('loginDocId').style.display = "none";
-        document.getElementById("registerDocId").style.display = "none";
+        sessionStorage.setItem("curr_user", JSON.stringify(response.data.user));
+        // document.getElementById('loginDocId').style.display = "none";
+        // document.getElementById("registerDocId").style.display = "none";
 
-        // window.location.href = "http://localhost:3000";
+        window.location.href = 'http://localhost:3000';
       } else {
         alert(response.data.errorMessage);
       }

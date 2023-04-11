@@ -13,7 +13,7 @@ const ConversationMessages = ({
   const [url, setUrl] = useState("");
   const [inocmingMessage, setIncomingMessage] = useState(null);
   const receiverId = selectedConversation.userData[0]._id;
-  const userObj = JSON.parse(localStorage.getItem("curr_user"));
+  const userObj = JSON.parse(sessionStorage.getItem("curr_user"));
 
 
   const socket = useRef();

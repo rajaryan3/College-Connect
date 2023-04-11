@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 
 const PostResource = () => {
-  const userObj = JSON.parse(localStorage.getItem("curr_user"));
+  const userObj = JSON.parse(sessionStorage.getItem("curr_user"));
   const [formData, setFormData] = useState({
     currentYear: userObj.current_year,
     AY: userObj.AY,

@@ -1,7 +1,7 @@
 import React from 'react';
 
 const LogOut = () => {
-    localStorage.removeItem('curr_user');
+    sessionStorage.removeItem('curr_user');
     alert('Logged Out');
     // const list1 = document.querySelectorAll('#loginDocId', '#registerDocId');
     // const list2 = document.querySelectorAll("#profileDocId", "#chatDocId", '#resourcesDocId', 'addresourcesDocId');
