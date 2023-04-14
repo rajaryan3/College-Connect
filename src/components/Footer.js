@@ -32,7 +32,7 @@ const Footer = ({ sendText, value, setValue, url, setUrl }) => {
         />
 
         <div
-          class="input"
+          className ="input"
           inputprops={{ "aria-label": "search" }}
           onChange={(e) => {
             setValue(e.target.value);
@@ -40,19 +40,19 @@ const Footer = ({ sendText, value, setValue, url, setUrl }) => {
           value={value}
           id="inputText"
         >
-          <i class="fas fa-camera"></i>
-          <i class="far fa-laugh-beam"></i>
+          <i className="fas fa-camera"></i>
+          <i className="far fa-laugh-beam"></i>
           <input
             placeholder="Type your message here!"
             type="text"
             ref={inputTextRef}
             style={{ marginLeft: "20px" }}
           />
-          <i class="fas fa-microphone"></i>
+          <i className="fas fa-microphone"></i>
         </div>
-        {/* <img class="sendButton" src="./sendButton.png" alt="sendButton" /> */}
+        {/* <img className="sendButton" src="./sendButton.png" alt="sendButton" /> */}
         {/* <img
-          class="sendButton"
+          className="sendButton"
           src="sendButton.png"
           alt="sendButton"
           onClick={handleSendClick}

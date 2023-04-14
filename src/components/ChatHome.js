@@ -3,20 +3,40 @@ import ConversationMessages from "./ConversationMessages";
 import "../styles/chat.css";
 import axios from "axios";
 
-function UserCard({ user, setSelectedConversation }) {
+function UserCard({ user, setSelectedConversation, selectedConversation, setNewMessageFlag }) {
   const { first_name, last_name, branch, current_year, degree } = user;
+  
   const userObj = JSON.parse(sessionStorage.getItem("curr_user"));
 
-   const handleConversationClick = async() => {
-     const response = await axios.post("http://localhost:8000/conversation", {
-       senderId: userObj._id,
-       receiverId: user._id,
-     });
-     console.log(userObj._id, user._id);
-     console.log(response.data);
-    //  setSelectedConversation(response.data);
-     console.log('Key pressed');
-   };
+  // useEffect(() => {
+  //   console.log(selectedConversation);
+  // }, [selectedConversation]);
+
+  const handleConversationClick = async () => {
+    const response = await axios.post("http://localhost:8000/conversation", {
+      senderId: userObj._id,
+      receiverId: user._id,
+    });
+    // console.log(response.data);
+    // console.log(userObj._id, response.data._id);
+    // setSelectedConversation(response.data);
+    try{
+      const res2 = await axios.get("http://localhost:8000/currentConversation",{
+          params:{
+            user_id : userObj._id,
+            conversation_id : response.data._id
+          }
+      })
+      // console.log(selectedConversation);
+      setSelectedConversation(res2.data);
+      // console.log(selectedConversation);
+
+    }
+    catch(err){
+      console.log(err);
+    }
+    setNewMessageFlag(Date.now());
+  };
 
   return (
     <div className="user-card">
@@ -31,37 +51,15 @@ function UserCard({ user, setSelectedConversation }) {
 
 function ChatHome() {
   const [users, setUsers] = useState([]);
+  const [conversations, setConversations] = useState([]);
+  const [selectedConversation, setSelectedConversation] = useState(null);
+  const [NewMessageFlag, setNewMessageFlag] = useState(null);
+  const userObj = JSON.parse(sessionStorage.getItem("curr_user"));
   const [formData, setFormData] = useState({
     branch: "",
     current_year: "",
     degree: "",
   });
-    // const [conversation, setConversation] = useState();
-  const [selectedConversation, setSelectedConversation] = useState(null);
-  //    const [NewMessageFlag, setNewMessageFlag] = useState(null);
-  const userObj = JSON.parse(sessionStorage.getItem("curr_user"));
-
-  // useEffect(() => {
-  //   const userData = { id: userObj._id };
-  //   const fetchConversations = async () => {
-  //     try {
-  //       const response = await axios.get(
-  //         "http://localhost:8000/conversation",
-  //         {
-  //           params: userData,
-  //         }
-  //       );
-  //       setConversations(response.data);
-  //       console.log(response.data);
-  //     } catch (error) {
-  //       console.error("Error fetching conversations:", error);
-  //     }
-  //   };
-
-  //   fetchConversations();
-  // }, [NewMessageFlag]);
-
- 
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -82,22 +80,58 @@ function ChatHome() {
   };
 
   useEffect(() => {
-    async function fetchUsers() {
-      const response = await axios.get("http://localhost:8000/users");
-      setUsers(response.data.users);
-    }
+    const fetchUsers = async () => {
+      try {
+        const response = await axios.get("http://localhost:8000/users");
+        setUsers(response.data.users);
+        console.log(response.data.users);
+      } catch (error) {
+        console.error("Error fetching users:", error);
+      }
+    };
+
     fetchUsers();
   }, []);
+
+  // return (
+  //   <div className="chat-home">
+  //     <div className="users-list">
+  //       {users.map((user) => (
+  //         <UserCard
+  //           key={user._id}
+  //           user={user}
+  //           setSelectedConversation={setSelectedConversation}
+  //           selectedConversation={selectedConversation}
+  //           setNewMessageFlag={setNewMessageFlag}
+  //         />
+  //       ))}
+  //     </div>
+  //     <div className="conversation">
+  //       {selectedConversation ? (
+  //         <ConversationMessages
+  //           selectedConversation={selectedConversation}
+  //           setConversation={setConversations}
+  //           setSelectedConversation={setSelectedConversation}
+  //           setNewMessageFlag={setNewMessageFlag}
+  //           userObj={userObj}
+  //         />
+  //       ) : (
+  //         <h3>Select a conversation to start chatting</h3>
+  //       )}
+  //     </div>
+  //   </div>
+  // )};
 
   return (
     <div className="user-list">
       {selectedConversation ? (
         <ConversationMessages
           selectedConversation={selectedConversation}
-        //   setConversation={setConversations}
+          setConversation={setConversations}
           setSelectedConversation={setSelectedConversation}
-        //   setNewMessageFlag={setNewMessageFlag}
-        />
+          setNewMessageFlag={setNewMessageFlag}
+          userObj={userObj}
+      />
       ) : (
         <div>
           <form
@@ -171,5 +205,7 @@ function ChatHome() {
     </div>
   );
 }
+
+
 
 export default ChatHome;

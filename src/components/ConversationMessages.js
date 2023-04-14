@@ -14,6 +14,7 @@ const ConversationMessages = ({
   const [inocmingMessage, setIncomingMessage] = useState(null);
   const receiverId = selectedConversation.userData[0]._id;
   const userObj = JSON.parse(sessionStorage.getItem("curr_user"));
+  console.log(userObj._id)
 
 
   const socket = useRef();
@@ -131,6 +132,7 @@ const ConversationMessages = ({
 
   const userID = userObj._id;
   return (
+    
     <>
       <div className="chat">
         <a onClick={handleBackClick}>

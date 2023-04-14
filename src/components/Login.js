@@ -35,7 +35,7 @@ const Login = () => {
         // document.getElementById('loginDocId').style.display = "none";
         // document.getElementById("registerDocId").style.display = "none";
 
-        window.location.href = 'http://localhost:3000';
+        window.location.href = 'http://localhost:5000';
       } else {
         alert(response.data.errorMessage);
       }
