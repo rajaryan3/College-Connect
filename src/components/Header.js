@@ -9,9 +9,9 @@ const Header = () => {
       {/* <NavLink to="/login" id="loginDocId">
         Login
       </NavLink> */}
-      <NavLink to="/register" id="registerDocId">
+      {/* <NavLink to="/register" id="registerDocId">
         Register
-      </NavLink>
+      </NavLink> */}
       <NavLink to="/profile" id="profileDocId">
         Profile
       </NavLink>

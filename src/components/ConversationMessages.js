@@ -33,7 +33,7 @@ const ConversationMessages = ({
         ...data,
       });
       // console.log('helooooooooooo\n')
-      // console.log(data)
+      console.log(data)
 
       const getNewMessages = async () => {
         try {
