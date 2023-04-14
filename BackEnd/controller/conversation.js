@@ -149,9 +149,9 @@ const newConversation = async (request, response) => {
   });
 
   if (exist) {
-    response.status(200).json("conversation already exists");
-    return;
+    return response.status(200).json(exist);
   }
+  
   const newConversation = new conversation({
     participants: [senderId, receiverId],
   });
@@ -336,6 +336,7 @@ const getCurrentConversation = async (req, res) => {
     res.status(500).json({ error: "Failed to get current conversation" });
   }
 };
+
 
 module.exports = {
   newConversation,
