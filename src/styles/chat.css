@@ -262,6 +262,57 @@ a {
     color: #999;
 }
 
+
+/* .card3{
+    display: flex;
+    justify-content: space-evenly;
+} */
+.card3-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.card3 {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: row;
+ 
+  width: 1000px;
+  height: 100px;
+  margin: 16px;
+  border:1px solid rgb(226, 224, 224);
+  padding: 10px;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+}
+
+/* .card3 h3 {
+  width: 250px;
+  height: 150px;
+} */
+.pic_name{
+    display:flex;
+    min-width: 300px;
+}
+
+.card3 p {
+  margin: 0 10px;
+  flex-grow: 1;
+  text-align: center;
+  max-width: 300px;
+}
+
+.card3 button {
+  margin-left: 10px;
+  width:100px;
+  height:30px;
+}
+
+
+
+
 @-webkit-keyframes typing {
 
     0%,

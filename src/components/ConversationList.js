@@ -6,8 +6,32 @@ import ConversationMessages from "./ConversationMessages";
 const ConversationList = () => {
   const [conversations, setConversations] = useState([]);
   const [selectedConversation, setSelectedConversation] = useState(null);
-  const [NewMessageFlag, setNewMessageFlag] = useState(null);
+  const [NewMessageFlag, setNewMessageFlag] = useState(false);
   const userObj = JSON.parse(sessionStorage.getItem("curr_user"));
+
+  
+
+  // const [refreshCount, setRefreshCount] = useState(0);
+
+  // const timeoutId = setTimeout(() => {
+  //   setRefreshCount((count) => count + 1);
+  // }, 10000);
+
+  // return () => clearTimeout(timeoutId);
+
+  // useEffect(() => {
+  //   const intervalId = setInterval(() => {
+  //     setRefreshCount((count) => count + 1);
+  //   }, 10000);
+
+  //   return () => clearInterval(intervalId);
+  // }, []);
+
+  // useEffect(() => {
+  //   if (refreshCount > 0) {
+  //     window.location.reload();
+  //   }
+  // }, [refreshCount]);
 
 
   useEffect(() => {
@@ -25,6 +49,8 @@ const ConversationList = () => {
     };
 
     fetchConversations();
+    
+    // return () => clearTimeout(timeoutId);
   }, [NewMessageFlag]);
 
   const handleConversationClick = (conversation) => {
@@ -49,7 +75,6 @@ const ConversationList = () => {
                 display: "flex",
                 flexDirection: "column",
                 minWidth: "700px",
-                
               }}
             >
               <i className="fas fa-bars fa-2x"></i>

@@ -7,4 +7,6 @@ export { default as Chat } from "./components/Chat";
 export { default as Resources } from "./components/Resources";
 export { default as PostResource } from "./components/PostResource";
 export { default as LogOut } from "./components/LogOut";
+export { default as MyPosts } from "./components/MyPosts";
+
 

@@ -4,9 +4,16 @@ import axios from "axios";
 function PostFrame({ post }) {
   return (
     <div className="post-frame">
-      <h3>
-        {post.owner.first_name} {post.owner.last_name}
-      </h3>
+      <div style={{display:"flex"}}>
+        <img
+          src={post.owner.photo}
+          style={{ width: "50px", height:"40px", borderRadius:"50%", marginRight:"10px" }}
+          alt="profile_pic"
+        />
+        <h3>
+          {post.owner.first_name} {post.owner.last_name}
+        </h3>
+      </div>
       <p>
         {post.owner.current_year} {post.owner.branch}
       </p>

@@ -47,7 +47,7 @@ const ConversationMessages = ({
             { params: currUser }
           );
           setSelectedConversation(response2.data);
-          console.log(response2.data);
+          console.log("yes");
           setNewMessageFlag((prev) => !prev);
         } catch (error) {
           console.error("Error uploading messages:", error);
@@ -61,7 +61,7 @@ const ConversationMessages = ({
     inocmingMessage &&
       selectedConversation?.participants?.includes(inocmingMessage.senderId) &&
       setConversation((prev) => [...prev.messages, inocmingMessage]);
-  }, [inocmingMessage, selectedConversation]);
+  }, [inocmingMessage, selectedConversation ]);
 
   useEffect(() => {
     // console.log(url);
@@ -114,7 +114,7 @@ const ConversationMessages = ({
         setSelectedConversation(response2.data);
 
         console.log(response2.data);
-        setNewMessageFlag((prev) => !prev);
+        // setNewMessageFlag((prev) => !prev);
       } catch (error) {
         console.error("Error uploading messages:", error);
       }
@@ -123,7 +123,7 @@ const ConversationMessages = ({
     uploadNewMessages(newmessage);
     setValue("");
     document.getElementById("inputText").value = "";
-    setNewMessageFlag((prev) => !prev);
+    // setNewMessageFlag((prev) => !prev);
   };
 
   const handleBackClick = async () => {

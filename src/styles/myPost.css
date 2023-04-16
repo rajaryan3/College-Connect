@@ -1,0 +1,33 @@
+.card2-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.card2 {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: row;
+  width: 900px;
+  height: 200px;
+  margin: 20px;
+  padding: 10px;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+}
+
+.card2 img {
+  width: 250px;
+  height: 150px;
+}
+
+.card2 p {
+  margin: 0 10px;
+  flex-grow: 1;
+  text-align: center;
+}
+
+.card2 button {
+  margin-left: 10px;
+}

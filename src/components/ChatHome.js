@@ -4,7 +4,7 @@ import "../styles/chat.css";
 import axios from "axios";
 
 function UserCard({ user, setSelectedConversation, selectedConversation, setNewMessageFlag }) {
-  const { first_name, last_name, branch, current_year, degree } = user;
+  const { first_name, last_name, branch, current_year, degree, photo } = user;
   
   const userObj = JSON.parse(sessionStorage.getItem("curr_user"));
 
@@ -39,12 +39,24 @@ function UserCard({ user, setSelectedConversation, selectedConversation, setNewM
   };
 
   return (
-    <div className="user-card">
-      <h3>{`${first_name} ${last_name}`}</h3>
-      <p>
-        {branch} {current_year} {degree}
-      </p>
-      <button onClick={handleConversationClick}>Chat</button>
+    <div className="card3-container">
+      <div className="card3">
+        <div className="pic_name">
+          
+            <img
+              src={photo}
+              alt="MyPic"
+              style={{ width: "70px", height: "40px", marginRight:"10px" }}
+            />
+          
+          
+          <h3>{`${first_name} ${last_name}`}</h3>
+        </div>
+        <p>
+          {branch} {current_year} {degree}
+        </p>
+        <button onClick={handleConversationClick}>Chat</button>
+      </div>
     </div>
   );
 }
@@ -131,7 +143,7 @@ function ChatHome() {
           setSelectedConversation={setSelectedConversation}
           setNewMessageFlag={setNewMessageFlag}
           userObj={userObj}
-      />
+        />
       ) : (
         <div>
           <form
@@ -190,8 +202,14 @@ function ChatHome() {
               </select>
             </label>
             <br />
-            <button type="submit">Submit</button>
+            {/* <button type="submit" style={{width}}>Submit</button> */}
+            <button type="submit" className="btn btn-outline-success" style={{width:"80px", height:"40px"}}>
+              Submit
+            </button>
           </form>
+
+          <br></br>
+          <br></br>
 
           {users.map((user) => (
             <UserCard
