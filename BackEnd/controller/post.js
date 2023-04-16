@@ -58,7 +58,7 @@ const getPosts = async (request, response) => {
     try {
         const result = await Post.find().populate({
             path: 'owner',
-            select: 'first_name last_name current_year branch'
+            select: 'first_name last_name current_year branch photo'
         });
         // const result = await Post.find()
         response.status(200).json(result);
@@ -67,6 +67,24 @@ const getPosts = async (request, response) => {
     }
 }
 
+
+const getMyPosts = async(request, response) => {
+    try{
+        const result = await Post.find({owner:request.query.owner}).select('content text_description');
+        response.status(200).json(result);
+    } catch(error) {
+        response.status(500).json(error);
+    }
+}
+
+const deleteMyPosts = async(request, response) => {
+    try{
+        const result = await Post.findByIdAndDelete(request.body._id);
+        response.status(200).json(result);
+    } catch(error) {
+        response.status(500).json(error)
+    }
+}
 // const getPosts = async (request, response) => {
 //   try {
 //     const posts = await Post.find();
@@ -115,4 +133,4 @@ const getPosts = async (request, response) => {
 
 
 
-module.exports = { newPost , deletePost , getPosts }
+module.exports = { newPost , deletePost , getPosts, getMyPosts, deleteMyPosts }
