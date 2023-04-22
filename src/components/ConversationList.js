@@ -67,7 +67,7 @@ const ConversationList = () => {
           setNewMessageFlag={setNewMessageFlag}
         />
       ) : (
-        <>
+        
           <div className="center">
             <div
               className="contacts"
@@ -105,7 +105,7 @@ const ConversationList = () => {
               ))}
             </div>
           </div>
-        </>
+      
       )}
     </div>
   );

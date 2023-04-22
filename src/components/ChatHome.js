@@ -42,20 +42,25 @@ function UserCard({ user, setSelectedConversation, selectedConversation, setNewM
     <div className="card3-container">
       <div className="card3">
         <div className="pic_name">
-          
-            <img
-              src={photo}
-              alt="MyPic"
-              style={{ width: "70px", height: "40px", marginRight:"10px" }}
-            />
-          
-          
-          <h3>{`${first_name} ${last_name}`}</h3>
+          <img
+            src={photo}
+            alt="MyPic"
+            style={{ width: "40px", height: "40px", borderRadius:"50%", marginRight: "10px" }}
+          />
+
+          <h4>{`${first_name} ${last_name}`}</h4>
         </div>
         <p>
           {branch} {current_year} {degree}
         </p>
-        <button onClick={handleConversationClick}>Chat</button>
+        {/* <button onClick={handleConversationClick}>Chat</button> */}
+        <button
+          type="button"
+          className="btn btn-dark"
+          onClick={handleConversationClick}
+        >
+          Chat
+        </button>
       </div>
     </div>
   );
@@ -151,7 +156,9 @@ function ChatHome() {
             style={{
               display: "flex",
               justifyContent: "space-evenly",
-              marginTop: "20",
+              // marginTop: "20",
+              maxWidth:"80%", 
+              margin:"0px auto"
             }}
           >
             <label>
@@ -203,8 +210,8 @@ function ChatHome() {
             </label>
             <br />
             {/* <button type="submit" style={{width}}>Submit</button> */}
-            <button type="submit" className="btn btn-outline-success" style={{width:"80px", height:"40px"}}>
-              Submit
+            <button type="submit" className="btn btn-light" style={{width:"80px", height:"40px"}}>
+              Filter
             </button>
           </form>
 

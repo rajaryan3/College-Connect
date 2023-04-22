@@ -124,20 +124,33 @@ const Resources = () => {
     <div className="container">
       {currentSubject ? (
         <div>
-          <div style={{marginTop:"30px"}}>
-          <button className="btn btn-primary" onClick={handleBack}>
-            Back to Subjects
-          </button>
+          <div style={{ marginTop: "30px" }}>
+            <button className="btn btn-primary" onClick={handleBack}>
+              Back to Subjects
+            </button>
           </div>
-          <h1 style={{textAlign:"center",marginBottom:"40px"}}>{currentSubject.sub_name}</h1>
-          
+
+          <h1 style={{ textAlign: "center", marginBottom: "40px" }}>
+            {currentSubject.sub_name}
+          </h1>
+
           <div>{getResourceCards()}</div>
           {/* <div>{handleDelete()}</div> */}
         </div>
       ) : (
-        <div>{getSubjectCards()}</div>
+        <div
+          style={{
+            backgroundImage:
+              "url('https://images.pexels.com/photos/1329571/pexels-photo-1329571.jpeg?auto=compress&cs=tinysrgb&w=600')",
+              backgroundRepeat:"no-repeat",
+            height: "100vh",
+            // minHeight:"1000px",
+            width: "100%",
+          }}
+        >
+          {getSubjectCards()}
+        </div>
       )}
-      
     </div>
   );
 };

@@ -85,7 +85,7 @@ const Post = () => {
   // };
 
   return (
-    <div>
+    <div style={{border:"1px solid black", backgroundColor:"white", width:"75%", margin:"20px auto"}}>
       {/* <h1>File Upload Example</h1> */}
       <input id="fileInputButton" type="file" onChange={handleFileChange} />
       <label>
@@ -99,7 +99,10 @@ const Post = () => {
         />
       </label>
 
-      <button onClick={handleSubmit}>Upload Image</button>
+      {/* <button onClick={handleSubmit}>Upload Image</button> */}
+      <button type="button" class="btn btn-light" style={{border:"1px solid black"}} onClick={handleSubmit}>
+        Upload Image
+      </button>
       {/* <Image url="http://localhost:8000/file/1680858799615-blog-lotus-gfa2ffdb38_1920.jpg" /> */}
     </div>
   );

@@ -132,7 +132,7 @@ a {
 } */
 
 .chat {
-    transform: translate(17%, 5%);
+    transform: translate(7%, 5%);
     position: relative;
     display: flex;
     flex-direction: column;
@@ -279,6 +279,7 @@ a {
   align-items: center;
   justify-content: space-between;
   flex-direction: row;
+  background-color: white;
  
   width: 1000px;
   height: 100px;

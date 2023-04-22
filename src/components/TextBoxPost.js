@@ -1,24 +1,39 @@
 import React, { useState, useEffect } from "react";
+import '../styles/Post.css'
 import axios from "axios";
 
 function PostFrame({ post }) {
   return (
-    <div className="post-frame">
-      <div style={{display:"flex"}}>
-        <img
-          src={post.owner.photo}
-          style={{ width: "50px", height:"40px", borderRadius:"50%", marginRight:"10px" }}
-          alt="profile_pic"
-        />
-        <h3>
-          {post.owner.first_name} {post.owner.last_name}
-        </h3>
+    <div className="post-frame" style={{color:"white"}}>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          width: "95%",
+        }}
+      >
+        <div>
+          <img
+            src={post.owner.photo}
+            style={{
+              width: "25px",
+              height: "20px",
+              borderRadius: "50%",
+              marginRight: "10px",
+            }}
+            alt="profile_pic"
+          />
+          <h5 style={{display:"inline"}}>
+            {post.owner.first_name} {post.owner.last_name}
+          </h5>
+        </div>
+        <p>
+          {post.owner.current_year} {post.owner.branch}
+        </p>
       </div>
-      <p>
-        {post.owner.current_year} {post.owner.branch}
-      </p>
+
       <img src={post.content} alt={post.text_description} />
-      <h2>{post.text_description}</h2>
+      <h6>{post.text_description}</h6>
     </div>
   );
 }

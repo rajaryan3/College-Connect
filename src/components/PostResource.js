@@ -108,8 +108,32 @@ const PostResource = () => {
   };
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
+    // <div style={{ backgroundImage:"url("https://images.pexels.com/photos/2908984/pexels-photo-2908984.jpeg?auto=compress&cs=tinysrgb&w=600")", width:"100%", height:"60px"}}>
+    <div
+      style={{
+        backgroundImage:
+          "url('https://c1.wallpaperflare.com/preview/549/468/58/copy-space-copyspace-workspace-workplace.jpg')",
+        backgroundRepeat: "no-repeat",
+        backgroundSize: "cover",
+        width: "100%",
+        minHeight: "100vh",
+        padding: "60px 0",
+        boxSizing: "border-box",
+      }}
+    >
+      <form
+        onSubmit={handleSubmit}
+        style={{
+          border: "1px solid black",
+          padding: "20px",
+          backgroundColor: "rgba(255, 255, 255, 0.99)",
+          margin: "0px auto",
+          width: "60%",
+          marginTop: "80px",
+          boxSizing: "border-box",
+          height: "300px",
+        }}
+      >
         <label>
           Subject Name:
           <input
@@ -148,16 +172,6 @@ const PostResource = () => {
         </label>
         <br />
 
-        {/* <label>
-          Posted By:
-          <input
-            type="text"
-            name="posted_by"
-            value={formData.subjects[0].sources[0].posted_by}
-            onChange={handleInputChange}
-          />
-        </label>
-        <br /> */}
         <button
           style={{ marginLeft: "30px" }}
           type="submit"

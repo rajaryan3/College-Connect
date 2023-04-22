@@ -52,6 +52,8 @@ function Profile() {
   const handleSaveClick = async () => {
     try {
       const res = await axios.patch("http://localhost:8000/profile", formData);
+      console.log(formData);
+
       setData(res.data);
       setFormData(res.data);
       setEditing(false);
@@ -82,7 +84,12 @@ function Profile() {
             <br></br>
             <br></br>
           </div>
-          <UserDetails formData={formData} onChange={handleInputChange} />
+          <UserDetails
+            formData={formData}
+            setFormData={setFormData}
+            editing={editing}
+            onChange={handleInputChange}
+          />
           {/* <button
             style={{ display: "block", margin: "0 auto", marginTop:"40px" }}
             className="btn btn-success"
@@ -125,8 +132,13 @@ function Profile() {
           <br></br>
           <h1 style={{ textAlign: "center", color: "whitesmoke" }}>Profile</h1>
           <br></br>
+
           <div className="profileform">
-            <UserDetails formData={data} onChange={() => {}} />
+            <UserDetails
+              formData={data}
+              editing={editing}
+              onChange={() => {}}
+            />
           </div>
           <button
             style={{ display: "block", margin: "0 auto" }}

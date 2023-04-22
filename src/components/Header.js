@@ -5,13 +5,15 @@ import '../App.css'
 const Header = () => {
   return (
     <div className="header">
-      <NavLink to="/">Home</NavLink>
       {/* <NavLink to="/login" id="loginDocId">
         Login
       </NavLink> */}
       {/* <NavLink to="/register" id="registerDocId">
         Register
       </NavLink> */}
+      <NavLink to="/" id="homeDocId">
+        Home
+      </NavLink>
       <NavLink to="/profile" id="profileDocId">
         Profile
       </NavLink>

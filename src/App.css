@@ -10,6 +10,11 @@
   background-color: rgba(228, 243, 116, 0.814);
   height:36px;
   border:1px solid black;
+  /* position: fixed;
+  top: 0;
+  left: 0;
+  right: 0; */
+  /* z-index: 999; */
 }
 
 .profile_box {
