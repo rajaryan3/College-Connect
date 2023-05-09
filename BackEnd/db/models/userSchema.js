@@ -21,10 +21,24 @@ const userSchema = new mongoose.Schema({
     mail: { type: String, required: true },
     branch: { type: String, required: true },
     phone_no: { type: String, required: true },
+    // professional_arr: {
+    //     github: { type: String },
+    //     youtube: { type: String },
+    //     linkedIn: { type: String }
+    // },
     professional_arr: {
-        github: { type: String },
-        youtube: { type: String },
-        linkedIn: { type: String }
+        type: Object,
+        properties: {
+            github: {
+                type: String
+            },
+            youtube: {
+                type: String
+            },
+            linkedIn: {
+                type: String
+            }
+        }
     },
     my_description: { type: String },
     addon: [{

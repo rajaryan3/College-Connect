@@ -119,7 +119,7 @@ try {
 /* register api */
 app.post("/register", async(req, res) => {
 try {
-    const {user_role , first_name , last_name , mis ,current_year , AY , degree , mail , branch , phone_no  , my_description , photo , password } = req.body;
+    const {user_role, first_name, last_name, mis, current_year, AY, degree, mail, branch ,phone_no, professional_arr, my_description ,photo ,password } = req.body;
     if ( mail && password ) {
 
     const userexists = await user.findOne({ mail: req.body.mail })
@@ -136,7 +136,7 @@ try {
                     mail : mail,
                     branch : branch , 
                     phone_no : phone_no  ,
-                    // professiona_arr : professional_arr ,
+                    professional_arr : professional_arr ,
                     my_description : my_description ,
                     // addon : addon ,
                     photo :photo ,
@@ -260,6 +260,8 @@ app.get('/users', async (req, res) => {
         return res.status(500).json({ error: 'Server error' });
     }
 });
+
+
 
 
 
