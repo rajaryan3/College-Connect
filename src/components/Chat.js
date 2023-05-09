@@ -12,6 +12,7 @@ const Chat = () => {
       style={{
         background:
           "linear-gradient(120deg, hsla(120, 93%, 84%, 1) 0%, hsla(185, 90%, 51%, 1) 100%)",
+        height: "100%", width: "100%", minHeight:"100vh"
       }}
     >
       {/* <h1 style={{textAlign:"center"}}>My Chat App</h1> */}
@@ -24,6 +25,7 @@ const Chat = () => {
           class="btn btn-light"
           style={{marginLeft:"20px", marginTop:"20px"}}
           onClick={() => setShowConversationList(!showConversationList)}
+          id="allConvBTn"
         >
           All Conversations
         </button>

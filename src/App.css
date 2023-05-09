@@ -17,6 +17,11 @@
   /* z-index: 999; */
 }
 
+/* .headerNames{
+  display:"flex";
+  align-items: "center";
+} */
+
 .profile_box {
   border:1px solid black;
 }

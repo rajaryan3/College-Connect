@@ -39,21 +39,21 @@ const UserDetails = ({ formData, setFormData, editing, onChange }) => {
       {editing ? (
         <div
           style={{
-            width: "100px",
-            height: "100px",
-            border: "1px solid black",
-            marginBottom: "140px",
+            // width: "100px",
+            // height: "100px",
+            // border: "1px solid black",
+            marginBottom: "40px",
             marginLeft: "30px",
           }}
         >
           <img
             src={formData.photo}
             alt="profilepic"
-            style={{ width: "100px", height: "100px" }}
+            style={{ width: "200px", height: "100px", marginLeft:"40px" }}
           />
           <div style={{ marginBottom: "20px" }}>
             <input type="file" onChange={handleFileChange} />
-            <button id="profilepicbtn" onClick={handleSubmit}>
+            <button id="profilepicbtn" onClick={handleSubmit} type="submit" className="btn btn-outline-dark">
               Upload Image
             </button>
           </div>
@@ -63,7 +63,7 @@ const UserDetails = ({ formData, setFormData, editing, onChange }) => {
           style={{
             width: "100px",
             height: "100px",
-            border: "1px solid black",
+            // border: "1px solid black",
             marginBottom: "50px",
             marginLeft: "30px",
           }}

@@ -219,7 +219,7 @@ function ChatHome() {
                 <option value="Civil">Civil</option>
                 <option value="Computer">Computer</option>
                 <option value="Electrical">Electrical</option>
-                <option value="Electronics">Electronics</option>
+                <option value="ENTC">ENTC</option>
                 <option value="Instrumentation">Instrumentation</option>
                 <option value="Mechanical">Mechanical</option>
                 <option value="Metallurgy">Metallurgy</option>
