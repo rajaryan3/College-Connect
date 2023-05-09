@@ -82,7 +82,7 @@ const Login = () => {
             Login
           </button>
           <a
-            href="http://localhost:3000/register"
+            href="http://localhost:5000/register"
             style={{ textAlign: "center", textDecoration: "none" }}
             className="bluebutton"
           >

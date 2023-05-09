@@ -19,6 +19,7 @@ function Profile() {
     branch: "",
     phone_no: "",
     my_description: "",
+    professional_arr:{github:"", youtube:"", linkedIn:""},
     photo: "",
     password: "",
   });

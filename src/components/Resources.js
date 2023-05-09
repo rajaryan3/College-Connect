@@ -138,17 +138,19 @@ const Resources = () => {
           {/* <div>{handleDelete()}</div> */}
         </div>
       ) : (
-        <div
-          style={{
-            backgroundImage:
-              "url('https://images.pexels.com/photos/1329571/pexels-photo-1329571.jpeg?auto=compress&cs=tinysrgb&w=600')",
-              backgroundRepeat:"no-repeat",
-            height: "100vh",
-            // minHeight:"1000px",
-            width: "100%",
-          }}
-        >
-          {getSubjectCards()}
+        <div style={{ display: "flex" }}>
+          <div
+            style={{
+              backgroundImage:
+                "url('https://images.pexels.com/photos/1329571/pexels-photo-1329571.jpeg?auto=compress&cs=tinysrgb&w=600')",
+              backgroundRepeat: "no-repeat",
+              marginTop:"25px",
+              // height: "100vh",
+              // minHeight:"1000px",
+              width: "65%",
+            }}
+          ></div>
+          <div>{getSubjectCards()}</div>
         </div>
       )}
     </div>

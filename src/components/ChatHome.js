@@ -1,16 +1,42 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, React } from "react";
 import ConversationMessages from "./ConversationMessages";
+import Links from './Links';
 import "../styles/chat.css";
+
 import axios from "axios";
 
-function UserCard({ user, setSelectedConversation, selectedConversation, setNewMessageFlag }) {
-  const { first_name, last_name, branch, current_year, degree, photo } = user;
+function UserCard({ user, setSelectedConversation, setNewMessageFlag, linkUser, setLinkUser, links, setLinks }) {
+  const { first_name, last_name, branch, current_year, degree, photo, mail, my_description, professional_arr} = user;
+  // console.log(`User:${user.first_name}`);
   
   const userObj = JSON.parse(sessionStorage.getItem("curr_user"));
 
   // useEffect(() => {
   //   console.log(selectedConversation);
   // }, [selectedConversation]);
+
+  // const handleLinkFunction = () => {
+  //   console.log('Yes');
+    
+  //   <Links />
+  //   // </div>);
+  // }
+  const handleLink = () => {
+    setLinks(!links);
+    console.log(`L1: ${linkUser.professional_arr}`);
+    setLinkUser({
+      first_name: first_name,
+      last_name: last_name,
+      branch: branch,
+      current_year: current_year,
+      degree: degree,
+      photo: photo,
+      mail: mail,
+      my_description : my_description,
+      professional_arr : professional_arr
+    });
+  }
+
 
   const handleConversationClick = async () => {
     const response = await axios.post("http://localhost:8000/conversation", {
@@ -39,13 +65,19 @@ function UserCard({ user, setSelectedConversation, selectedConversation, setNewM
   };
 
   return (
+    
     <div className="card3-container">
       <div className="card3">
         <div className="pic_name">
           <img
             src={photo}
             alt="MyPic"
-            style={{ width: "40px", height: "40px", borderRadius:"50%", marginRight: "10px" }}
+            style={{
+              width: "40px",
+              height: "40px",
+              borderRadius: "50%",
+              marginRight: "10px",
+            }}
           />
 
           <h4>{`${first_name} ${last_name}`}</h4>
@@ -61,15 +93,27 @@ function UserCard({ user, setSelectedConversation, selectedConversation, setNewM
         >
           Chat
         </button>
+        <button onClick={handleLink}>View</button>
       </div>
     </div>
-  );
-}
+  )};
 
 function ChatHome() {
   const [users, setUsers] = useState([]);
   const [conversations, setConversations] = useState([]);
+  const [links, setLinks] = useState(false);
   const [selectedConversation, setSelectedConversation] = useState(null);
+  const [linkUser, setLinkUser] = useState({
+    "first_name": "",
+    "last_name": "",
+    "branch":"",
+    "current_year":"",
+    "degree":"",
+    "photo":"",
+    "mail":"",
+    "my_description":"",
+    "professional_arr":{"github":"", "youtube":"", "linkedIn":""}
+  });
   const [NewMessageFlag, setNewMessageFlag] = useState(null);
   const userObj = JSON.parse(sessionStorage.getItem("curr_user"));
   const [formData, setFormData] = useState({
@@ -150,6 +194,9 @@ function ChatHome() {
           userObj={userObj}
         />
       ) : (
+  
+        <div>
+          {links ? <Links linkUser={linkUser} setLinkUser={setLinkUser} links={links} setLinks={setLinks}/> : (
         <div>
           <form
             onSubmit={handleSubmit}
@@ -223,13 +270,15 @@ function ChatHome() {
               key={user._id}
               user={user}
               setSelectedConversation={setSelectedConversation}
+              setNewMessageFlag={setNewMessageFlag}
+              linkUser={linkUser}
+              setLinkUser = {setLinkUser}
+              links={links}
+              setLinks={setLinks}
             />
           ))}
         </div>
-      )}
-    </div>
-  );
-}
+      )}</div>)}</div>)};
 
 
 

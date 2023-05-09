@@ -30,7 +30,8 @@ const Register = () => {
     "phone_no":"",
     "my_description":"",
     "photo":"",
-    "password":""
+    "password":"",
+    "professional_arr":{"github":"", "youtube":"", "linkedIn":""}
   });
   const [url, setUrl] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
@@ -90,7 +91,8 @@ const Register = () => {
           "phone_no":"",
           "my_description":"",
           "photo":"",
-          "password":""
+          "password":"",
+          "professional_arr":{"github":"", "youtube":"", "linkedIn":""}
         });
         document.getElementById('photoInput').value = '';
         document.getElementById('confpwd').value = '';
@@ -224,7 +226,8 @@ const Register = () => {
             <option value="Civil">Civil</option>
             <option value="Computer">Computer</option>
             <option value="Electrical">Electrical</option>
-            <option value="Electronics">Electronics</option>
+            <option value="ENTC">ENTC</option>
+            {/* <option value="Electronics">Electronics</option> */}
             <option value="Instrumentation">Instrumentation</option>
             <option value="Mechanical">Mechanical</option>
             <option value="Metallurgy">Metallurgy</option>
@@ -306,7 +309,11 @@ const Register = () => {
             Register
           </button>
 
-          <a href="http://localhost:3000/login" style={{textAlign:"center", textDecoration:"none"}}className="bluebutton">
+          <a
+            href="http://localhost:5000/login"
+            style={{ textAlign: "center", textDecoration: "none" }}
+            className="bluebutton"
+          >
             Login Here.
           </a>
         </form>

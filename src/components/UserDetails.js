@@ -36,16 +36,16 @@ const UserDetails = ({ formData, setFormData, editing, onChange }) => {
 
   return (
     <>
-        {editing ? (
-          <div
-            style={{
-              width: "100px",
-              height: "100px",
-              border: "1px solid black",
-              marginBottom: "140px",
-              marginLeft: "30px",
-            }}
-          >
+      {editing ? (
+        <div
+          style={{
+            width: "100px",
+            height: "100px",
+            border: "1px solid black",
+            marginBottom: "140px",
+            marginLeft: "30px",
+          }}
+        >
           <img
             src={formData.photo}
             alt="profilepic"
@@ -53,27 +53,29 @@ const UserDetails = ({ formData, setFormData, editing, onChange }) => {
           />
           <div style={{ marginBottom: "20px" }}>
             <input type="file" onChange={handleFileChange} />
-            <button id="profilepicbtn" onClick={handleSubmit}>Upload Image</button>
+            <button id="profilepicbtn" onClick={handleSubmit}>
+              Upload Image
+            </button>
           </div>
-          </div>
-        ) :(
-            <div
-            style={{
-              width: "100px",
-              height: "100px",
-              border: "1px solid black",
-              marginBottom: "50px",
-              marginLeft: "30px",
-            }}
-          >
+        </div>
+      ) : (
+        <div
+          style={{
+            width: "100px",
+            height: "100px",
+            border: "1px solid black",
+            marginBottom: "50px",
+            marginLeft: "30px",
+          }}
+        >
           <img
             src={formData.photo}
             alt="profilepic"
-            style={{ width: "100px", height: "100px" }}
+            style={{ width: "200px", height: "100px" }}
           />
-          </div>
-        )}
-      
+        </div>
+      )}
+
       <div className="details">
         <div>
           <label htmlFor="first_name">First Name</label>
@@ -192,6 +194,82 @@ const UserDetails = ({ formData, setFormData, editing, onChange }) => {
             onChange={onChange}
           />
         </div>
+
+        <div>
+          <label htmlFor="github">Github</label>
+          <input
+            type="text"
+            name="professional_arr.github"
+            id="github"
+            value={
+              formData.professional_arr && formData.professional_arr.github
+            }
+            onChange={(event) => {
+              setFormData({
+                ...formData,
+                professional_arr: {
+                  ...formData.professional_arr,
+                  github: event.target.value,
+                },
+              });
+            }}
+          />
+        </div>
+
+        <div>
+          <label htmlFor="youtube">Youtube</label>
+          <input
+            type="text"
+            name="professional_arr.youtube"
+            id="youtube"
+            value={
+              formData.professional_arr && formData.professional_arr.youtube
+            }
+            onChange={(event) =>
+              setFormData({
+                ...formData,
+                professional_arr: {
+                  ...formData.professional_arr,
+                  youtube: event.target.value,
+                },
+              })
+            }
+          />
+        </div>
+
+        <div>
+          <label htmlFor="linkedIn">LinkedIn</label>
+        
+          <input
+            type="text"
+            name="professional_arr.linkedIn"
+            id="linkedIn"
+            value={
+              formData.professional_arr && formData.professional_arr.linkedIn
+            }
+            onChange={(event) => {
+              console.log(formData);
+              setFormData({
+                ...formData,
+                professional_arr: {
+                  ...formData.professional_arr,
+                  linkedIn: event.target.value,
+                },
+              });
+            }}
+          />
+           
+        </div>
+
+        {/* <div>
+          <label htmlFor="my_description">Description</label>
+          <input
+            type="text"
+            name="my_description"
+            value={formData.my_description}
+            onChange={onChange}
+          />
+        </div> */}
 
         {/* <div>
           <label htmlFor="photo">Photo</label>
