@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import ConversationList from './ConversationList';
 import ChatHome from './ChatHome';
 import "../styles/chat.css";
@@ -12,27 +12,35 @@ const Chat = () => {
       style={{
         background:
           "linear-gradient(120deg, hsla(120, 93%, 84%, 1) 0%, hsla(185, 90%, 51%, 1) 100%)",
-        height: "100%", width: "100%", minHeight:"100vh"
+        height: "100%",
+        width: "100%",
+        minHeight: "100vh",
       }}
     >
-      {/* <h1 style={{textAlign:"center"}}>My Chat App</h1> */}
-      {/* <ConversationList /> */}
-
       <div>
-       
-        <button
-          type="button"
-          class="btn btn-light"
-          style={{marginLeft:"20px", marginTop:"20px"}}
-          onClick={() => setShowConversationList(!showConversationList)}
-          id="allConvBTn"
-        >
-          All Conversations
-        </button>
+        {showConversationList ? (
+          <button
+            type="button"
+            class="btn btn-light"
+            style={{ marginLeft: "20px", marginTop: "20px" }}
+            onClick={() => setShowConversationList(!showConversationList)}
+            id="allConvBTn"
+          >
+            Back to ChatHome
+          </button>
+        ) : (
+          <button
+            type="button"
+            class="btn btn-light"
+            style={{ marginLeft: "20px", marginTop: "20px" }}
+            onClick={() => setShowConversationList(!showConversationList)}
+            id="allConvBTn"
+          >
+            Previous Conversations
+          </button>
+        )}
         {showConversationList && <ConversationList />}
       </div>
-      {/* <button style={{width:"150px",height:"20px"}} onClick={() => <ConversationList/>}>All Conversations</button> */}
-      {/* <ConversationList/> */}
 
       {!showConversationList && <ChatHome />}
     </div>

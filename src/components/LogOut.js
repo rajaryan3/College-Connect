@@ -1,8 +1,12 @@
 import React from 'react';
+import Login from './Login.js';
 
 const LogOut = () => {
+
+
     sessionStorage.removeItem('curr_user');
     alert('Logged Out');
+
     // const list1 = document.querySelectorAll('#loginDocId', '#registerDocId');
     // const list2 = document.querySelectorAll("#profileDocId", "#chatDocId", '#resourcesDocId', 'addresourcesDocId');
 
@@ -16,7 +20,7 @@ const LogOut = () => {
 
   return (
     <div>
-     
+     <Login/>
     </div>
   );
 }

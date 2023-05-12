@@ -4,19 +4,6 @@ import "../styles/Register.css"
 
 const Register = () => {
 
-  // const [fname, setFname] = useState('')
-  // const [lname, setLname] = useState('')
-  // const [mis, setMis] = useState("")
-  // const [currYear, setCurrYear] = useState("")
-  // const [acadYear, setAcadYear] = useState("")
-  // const [degree, setDegree] = useState("")
-  // const [branch, setBranch] = useState("")
-  // const [mobile, setMobile] = useState()
-  // const [email, setEmail] = useState("")
-  // const [desc, setDesc] = useState("")
-  // // const [addon, setAddon] = useState("")
-  // const [photo, setPhoto] = useState("")
-  // const [password, setPassword] = useState('')
   const [formData, setFormData] = useState({
     "user_role":"user",
     "first_name": "",
@@ -310,7 +297,7 @@ const Register = () => {
           </button>
 
           <a
-            href="http://localhost:5000/login"
+            href="http://localhost:3000/login"
             style={{ textAlign: "center", textDecoration: "none" }}
             className="bluebutton"
           >

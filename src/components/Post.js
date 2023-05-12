@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from "react";
-// import mongoose from 'mongoose';
 import axios from "axios";
-// import TextBoxPost from "./TextBoxPost";
 import '../styles/Post.css';
 
 
@@ -9,11 +7,7 @@ const Post = () => {
   const [url, setUrl] = useState(null);
   const userObj = JSON.parse(sessionStorage.getItem("curr_user"));
 
-  //  const [showComponent, setShowComponent] = useState(false);
-
-  //  const handleClick = () => {
-  //    setShowComponent(true);
-  //  };
+  
   const [file, setFile] = useState({
     owner: userObj._id,
     content: "",

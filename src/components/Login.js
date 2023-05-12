@@ -35,7 +35,7 @@ const Login = () => {
         // document.getElementById('loginDocId').style.display = "none";
         // document.getElementById("registerDocId").style.display = "none";
 
-        window.location.href = 'http://localhost:5000';
+        window.location.href = 'http://localhost:3000';
       } else {
         alert(response.data.errorMessage);
       }
@@ -82,7 +82,7 @@ const Login = () => {
             Login
           </button>
           <a
-            href="http://localhost:5000/register"
+            href="http://localhost:3000/register"
             style={{ textAlign: "center", textDecoration: "none" }}
             className="bluebutton"
           >

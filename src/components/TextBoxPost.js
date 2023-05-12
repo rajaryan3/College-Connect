@@ -51,9 +51,11 @@ function TextBoxPost() {
 
   return (
     <div className="post-list">
-      {posts.map((post) => (
-        <PostFrame key={post._id} post={post} />
-      ))}
+      {posts
+        .sort(() => Math.random() - 0.5)
+        .map((post) => (
+          <PostFrame key={post._id} post={post} />
+        ))}
     </div>
   );
 }

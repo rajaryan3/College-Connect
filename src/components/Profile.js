@@ -81,9 +81,9 @@ function Profile() {
       {editing ? (
         <div>
           <div>
-            <h1 style={{ textAlign: "center" }}>Profile</h1>
+            <h1 style={{ textAlign: "center", marginTop:"25px" }}>Profile</h1>
             <br></br>
-            <br></br>
+           
           </div>
           <UserDetails
             formData={formData}

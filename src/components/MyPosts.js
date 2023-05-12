@@ -69,7 +69,7 @@ const MyPosts = () => {
 
     return (
         <div>
-        <h1 style={{textAlign:"center"}}>My Posts</h1>
+        <h1 style={{textAlign:"center", marginTop:"25px"}}>My Posts</h1>
         {myposts.map((mypost)=>{
             return page({mypost, setDeleted});
         })}

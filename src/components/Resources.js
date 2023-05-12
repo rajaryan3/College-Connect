@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import '../styles/Resources.css'
-// import PostResource from "./PostResource";
-// import DeleteResource from './DeleteResource'
+
 
 const Resources = () => {
   const [resources, setResources] = useState([]);
@@ -26,11 +25,11 @@ const Resources = () => {
             currentYear: userObj.current_year,
           },
         });
-        // setResources(res.data);
-        const updatedSubject = { ...currentSubject }; // create a copy of currentSubject
+        
+        const updatedSubject = { ...currentSubject }; 
         updatedSubject.sources = updatedSubject.sources.filter(
           (source) => source.title !== props.content
-        ); // remove the deleted source from the currentSubject sources array
+        ); 
         setCurrentSubject(updatedSubject); 
         console.log(currentSubject);
       }
@@ -82,6 +81,7 @@ const Resources = () => {
               <a href={source.linkOrFileUpload} className="card-link">
                 View Resource
               </a>
+              {userObj.user_role === 'CR' && 
               <button
                 type="submit"
                 className="btn btn-danger deleteButton"
@@ -98,6 +98,7 @@ const Resources = () => {
               >
                 Delete
               </button>
+              }
             </div>
           </div>
         ))}

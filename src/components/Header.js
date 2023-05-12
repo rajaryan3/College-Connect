@@ -3,6 +3,10 @@ import { NavLink } from 'react-router-dom';
 import '../App.css'
 
 const Header = () => {
+
+  const userObj = JSON.parse(sessionStorage.getItem("curr_user"));
+
+
   return (
     <div
       className="header"
@@ -73,6 +77,7 @@ const Header = () => {
           </NavLink>
         </div>
 
+        {userObj.user_role === 'CR' && 
         <div>
           <img
             src="https://cdn.iconscout.com/icon/free/png-512/free-add-1470-475065.png?f=avif&w=512"
@@ -84,7 +89,8 @@ const Header = () => {
             <strong>Add Resources</strong>
           </NavLink>
         </div>
-
+        }
+        
         <div>
           <img
             src="https://cdn.iconscout.com/icon/premium/png-512-thumb/logout-3028583-2521684.png?f=avif&w=512"

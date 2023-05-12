@@ -1,9 +1,11 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 // import axios from 'axios';
+
 
 const Footer = ({ sendText, value, setValue, url, setUrl }) => {
   const inputTextRef = useRef(null);
   const inputFileRef = useRef(null);
+
 
   const handleSendClick = async () => {
     sendText();
@@ -16,9 +18,11 @@ const Footer = ({ sendText, value, setValue, url, setUrl }) => {
     setUrl(event.target.files[0]);
   };
 
+
+
   return (
-    <>
       <div>
+
         <input
           type="file"
           ref={inputFileRef}
@@ -32,7 +36,7 @@ const Footer = ({ sendText, value, setValue, url, setUrl }) => {
         />
 
         <div
-          className ="input"
+          className="input"
           inputprops={{ "aria-label": "search" }}
           onChange={(e) => {
             setValue(e.target.value);
@@ -65,8 +69,8 @@ const Footer = ({ sendText, value, setValue, url, setUrl }) => {
           onClick={handleSendClick}
         />
       </div>
-    </>
   );
 };
+
 
 export default Footer;

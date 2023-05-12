@@ -99,9 +99,9 @@ a {
     transform: translate(-37rem, -50%);
     width: 47rem;
     height: 32rem;
-    padding: 1rem 2rem 1rem 1rem;
+    padding: 1rem 2rem 1rem 2rem;
     box-sizing: border-box;
-    border-radius: 1rem 0 0 1rem;
+    border-radius: 1rem 1rem 1rem 1rem;
     cursor: pointer;
     background: white;
     box-shadow: 0 0 8rem 0 rgba(0, 0, 0, 0.1), 2rem 2rem 4rem -3rem rgba(0, 0, 0, 0.5);

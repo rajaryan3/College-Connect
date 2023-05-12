@@ -265,7 +265,7 @@ function ChatHome() {
           <br></br>
           <br></br>
 
-          {users.map((user) => (
+          {users.filter(user => user._id !== userObj._id).map((user) => (
             <UserCard
               key={user._id}
               user={user}

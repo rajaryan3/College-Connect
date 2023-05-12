@@ -8,32 +8,7 @@ const ConversationList = () => {
   const [selectedConversation, setSelectedConversation] = useState(null);
   const [NewMessageFlag, setNewMessageFlag] = useState(false);
   const userObj = JSON.parse(sessionStorage.getItem("curr_user"));
-
   
-
-  // const [refreshCount, setRefreshCount] = useState(0);
-
-  // const timeoutId = setTimeout(() => {
-  //   setRefreshCount((count) => count + 1);
-  // }, 10000);
-
-  // return () => clearTimeout(timeoutId);
-
-  // useEffect(() => {
-  //   const intervalId = setInterval(() => {
-  //     setRefreshCount((count) => count + 1);
-  //   }, 10000);
-
-  //   return () => clearInterval(intervalId);
-  // }, []);
-
-  // useEffect(() => {
-  //   if (refreshCount > 0) {
-  //     window.location.reload();
-  //   }
-  // }, [refreshCount]);
-
-
   useEffect(() => {
     const userData = { id: userObj._id };
     const fetchConversations = async () => {
@@ -42,7 +17,7 @@ const ConversationList = () => {
           params: userData,
         });
         setConversations(response.data);
-        console.log(response.data);
+        // console.log(response.data);
       } catch (error) {
         console.error("Error fetching conversations:", error);
       }
@@ -67,20 +42,20 @@ const ConversationList = () => {
           setNewMessageFlag={setNewMessageFlag}
         />
       ) : (
-        
-          <div className="center">
-            <div
-              className="contacts"
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                minWidth: "700px",
-              }}
-            >
-              <i className="fas fa-bars fa-2x"></i>
-              <h2 style={{ textAlign: "center" }}>Contacts</h2>
-
-              {conversations.map((conversation) => (
+        <div className="center">
+          <div
+            className="contacts"
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              minWidth: "900px",
+              overflowX: "auto",
+            }}
+          >
+            <i className="fas fa-bars fa-2x"></i>
+            <h2 style={{ textAlign: "center" }}>Contacts</h2>
+            {console.log(conversations)}
+            {conversations.map((conversation) => (
                 <button
                   style={{ marginBottom: "15px" }}
                   key={conversation.userData[0]._id}
@@ -103,9 +78,8 @@ const ConversationList = () => {
                   </div>
                 </button>
               ))}
-            </div>
           </div>
-      
+        </div>
       )}
     </div>
   );
